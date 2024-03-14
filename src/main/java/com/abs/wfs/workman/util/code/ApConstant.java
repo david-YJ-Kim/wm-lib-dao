@@ -1,7 +1,6 @@
 package com.abs.wfs.workman.util.code;
 
 public enum ApConstant {
-    _,
 
     BRS,
     FIS,

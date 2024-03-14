@@ -1,6 +1,6 @@
 package com.abs.wfs.workman.intf.solace.util;
 
-import com.abs.cmn.fis.config.SolaceSessionConfiguration;
+import com.abs.wfs.workman.config.SolaceSessionConfiguration;
 import com.solacesystems.jcsmp.*;
 
 import java.util.Map;

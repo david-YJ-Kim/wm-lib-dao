@@ -1,6 +1,6 @@
 package com.abs.wfs.workman.util;
 
-import com.abs.cmn.fis.util.code.UnitCode;
+import com.abs.wfs.workman.util.code.UnitCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.util.StringUtils;

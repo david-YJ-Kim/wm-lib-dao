@@ -1,6 +1,6 @@
 package com.abs.wfs.workman.config;
 
-import com.abs.cmn.fis.util.FisCommonUtil;
+import com.abs.wfs.workman.util.FisCommonUtil;
 import com.solacesystems.jcsmp.*;
 import lombok.Getter;
 import org.slf4j.Logger;

@@ -1,8 +1,8 @@
 package com.abs.wfs.workman.intf.solace.util.vo;
 
 
-import com.abs.cmn.fis.util.FisCommonUtil;
-import com.abs.cmn.fis.util.code.FisFileType;
+import com.abs.wfs.workman.intf.solace.util.code.FisFileType;
+import com.abs.wfs.workman.util.FisCommonUtil;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package com.abs.wfs.workman.intf.solace.util.code;
 
 public enum FisConstant {
-    _,
 
     BRS,
     FIS,

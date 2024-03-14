@@ -1,9 +1,7 @@
 package com.abs.wfs.workman.intf.solace;
 
-import com.abs.cmn.fis.config.SolaceSessionConfiguration;
-import com.abs.cmn.fis.util.FisMessageList;
-import com.abs.cmn.fis.util.code.FisConstant;
-import com.abs.cmn.fis.util.code.FisFileType;
+import com.abs.wfs.workman.config.SolaceSessionConfiguration;
+import com.abs.wfs.workman.util.code.ApConstant;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solacesystems.jcsmp.*;
@@ -59,7 +57,7 @@ public class InterfaceSolacePub {
 
             SDTMap userPropMap = JCSMPFactory.onlyInstance().createMap();
 
-            userPropMap.putString(FisConstant.cid.name(), sendCid);
+            userPropMap.putString(ApConstant.cid.name(), sendCid);
             txtMsg.setText(payload);
             txtMsg.setProperties(userPropMap);
 
@@ -72,33 +70,6 @@ public class InterfaceSolacePub {
     }
 
 
-    @Deprecated
-    public void sendTextMessage(String cid, String payload, String topicName, String fileType){
-        try{
-
-            XMLMessageProducer prod = session.getMessageProducer(pubEventHandler);
-            TextMessage txtMsg = JCSMPFactory.onlyInstance().createMessage(TextMessage.class);
-
-            SDTMap userPropMap = JCSMPFactory.onlyInstance().createMap();
-
-            String sendCid = null;
-
-            if ( fileType.equals(FisFileType.INSP.name()) )
-                sendCid = FisMessageList.BRS_INSP_DATA_SAVE;
-            else
-                sendCid = FisMessageList.BRS_MEAS_DATA_SAVE;
-
-            userPropMap.putString(FisConstant.cid.name(), sendCid);
-            txtMsg.setText(payload);
-            txtMsg.setProperties(userPropMap);
-
-            txtMsg.setDeliveryMode(DeliveryMode.PERSISTENT);
-            prod.send(txtMsg, createTopic(topicName));
-        }catch (Exception e){
-
-            e.printStackTrace();
-        }
-    }
 
 
     public void sendQueueMessage(String cid, String payload, String queueName){
@@ -116,8 +87,8 @@ public class InterfaceSolacePub {
 //            else
 //            	sendCid = FisMessageList.BRS_MEAS_DATA_SAVE_REQ;
 
-            userPropMap.putString(FisConstant.cid.name(), cid);
-            userPropMap.putString(FisConstant.messageId.name(), "MSG-KEY-TMP-" + UUID.randomUUID() + "-" + System.currentTimeMillis());
+            userPropMap.putString(ApConstant.cid.name(), cid);
+            userPropMap.putString(ApConstant.messageId.name(), "MSG-KEY-TMP-" + UUID.randomUUID() + "-" + System.currentTimeMillis());
             txtMsg.setText(payload);
             txtMsg.setProperties(userPropMap);
 
