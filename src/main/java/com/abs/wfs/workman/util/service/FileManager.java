@@ -1,7 +1,5 @@
 package com.abs.wfs.workman.util.service;
 
-import com.abs.cmn.fis.config.FisSftpPropertyObject;
-import com.abs.cmn.fis.util.code.FisConstant;
 import com.jcraft.jsch.SftpException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +18,6 @@ public class FileManager {
     private Boolean localMode = null;
 
     public Boolean isLocalMode(){
-        if(localMode == null){
-            localMode = FisSftpPropertyObject.getInstance().getFileMode().equals(FisConstant.local.name()) ? true : false;
-        }
         return localMode;
     }
 
@@ -205,50 +200,18 @@ public class FileManager {
 
     private File getFileFromRemote(String path, String name) throws Exception {
 
-        String localPath = FisSftpPropertyObject.getInstance().getLocalFilePath();
         File file = null;
+        return file;
 
-        try {
-            // TODO : FileStream 을파일로 변환해서 return 한다.
-
-            file = new File (localPath);
-
-            FisSftpPropertyObject.getInstance().getSftpChannel().get(path+name, new FileOutputStream(localPath));
-
-            file = new File(localPath);
-
-            return file;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("## SftpException : ", e);
-            log.error("File Not exist");
-            throw new Exception(String.format("File is not exist under path: %s ", (path + name)));
-        }
     }
 
     private boolean removeFileFromRemote(String path, String name) {
 
-        try {
-            String rmFilePath = path+name;
-            FisSftpPropertyObject.getInstance().getSftpChannel().rm(rmFilePath);
-            return true;
-        } catch (SftpException e) {
-            log.error("## FileManager , removeFileFromRemote : ", e);
-            return false;
-        }
+        return true;
 
     }
 
     private boolean insertFileToRemote(String fromPath,String path, String name) {
-        try {
-            String targetPath = path+name;
-            String existFilePath = fromPath+name;
-            FisSftpPropertyObject.getInstance().getSftpChannel().put(existFilePath ,targetPath);
-            return true;
-        } catch (SftpException e) {
-            log.error("## FileManager , insertFileToRemote : ", e);
-            return false;
-        }
+        return true;
     }
 }

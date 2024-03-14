@@ -1,12 +1,7 @@
 package com.abs.wfs.workman.activator;
 
-import com.abs.cmn.fis.config.FisPropertyObject;
-import com.abs.cmn.fis.config.SolaceSessionConfiguration;
-import com.abs.cmn.fis.domain.rule.mng.CnFisIfRuleManager;
-import com.abs.cmn.fis.intf.solace.InterfaceSolacePub;
-import com.abs.cmn.fis.intf.solace.InterfaceSolaceSub;
-import com.abs.cmn.fis.message.FisMessagePool;
 import com.abs.wfs.workman.config.ApPropertyObject;
+import com.abs.wfs.workman.config.ApSharedVariable;
 import com.abs.wfs.workman.config.SolaceSessionConfiguration;
 import com.abs.wfs.workman.intf.solace.InterfaceSolacePub;
 import com.abs.wfs.workman.intf.solace.InterfaceSolaceSub;
@@ -34,10 +29,20 @@ public class WorkManStartedActivator implements ApplicationRunner {
         this.initializeSolaceResources();
         log.info("Complete initialize solace resources.");
 
+
+        this.initializeSharedVariables();
+
+
         ApMessagePool.getMessageManageMap();
         log.info("Initialize Message Pool. is null?: {}", ApMessagePool.getMessageManageMap() == null);
 
 
+    }
+
+    private void initializeSharedVariables(){
+
+        // TODO Query to get data (RDS EQP etc...)
+        ApSharedVariable apSharedVariable = ApSharedVariable.getInstance();
     }
 
     private void initializeSolaceResources(){

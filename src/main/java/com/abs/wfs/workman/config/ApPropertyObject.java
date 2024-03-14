@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 
 @Getter
 @Component
@@ -74,7 +76,6 @@ public class ApPropertyObject {
 
     @Value("${ap.worker.name.prefix}")
     private String threadPrefixName; // 생성되는 Thread 접두사 명
-
 
 
     private InterfaceSolaceSub interfaceSolaceSub;
