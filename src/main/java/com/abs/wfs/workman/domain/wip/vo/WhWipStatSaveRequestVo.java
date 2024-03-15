@@ -1,7 +1,6 @@
 package com.abs.wfs.workman.domain.wip.vo;
 
 import com.abs.wfs.workman.domain.wip.model.WhWipStat;
-import com.abs.wfs.workman.domain.wip.model.WnWipStat;
 import com.abs.wfs.workman.util.code.UseYn;
 import lombok.Builder;
 import lombok.Data;
@@ -34,17 +33,17 @@ public class WhWipStatSaveRequestVo {
     private String batchId;
     private String resvEqpId;
     private String resvPortId;
-    private UseYn eqpChkYn;
-    private UseYn rcpChkYn;
-    private UseYn trackInCnfmYn;
+    private String eqpChkYn;
+    private String rcpChkYn;
+    private String trackInCnfmYn;
     private String resvGrpId;
     private String batchSeq;
     private String selfInspInfoObjId;
-    private UseYn selfInspYn;
+    private String selfInspYn;
     private Integer selfInspPanelCnt;
     private String resvOutPortId;
     private String resvOutCarrId;
-    private UseYn smplLotYn;
+    private String smplLotYn;
     private String smplWorkTyp;
     private Integer smplQty;
     private String mdfyUserId;
@@ -53,7 +52,7 @@ public class WhWipStatSaveRequestVo {
     private Timestamp crtDt;
 
     @Builder
-    public WhWipStatSaveRequestVo(String refObjId, String siteId, String lotId, String carrId, String carrLctnNm, String workStatCd, String dtlWorkStatCd, String cstmEvntNm, String evntNm, Timestamp fnlEvntDt, String prevCstmEvntNm, String prevEvntNm, String rsnCd, String tid, String trnsCm, String useStatCd, String crntEqpId, String crntPortId, String batchId, String resvEqpId, String resvPortId, UseYn eqpChkYn, UseYn rcpChkYn, UseYn trackInCnfmYn, String resvGrpId, String batchSeq, String selfInspInfoObjId, UseYn selfInspYn, Integer selfInspPanelCnt, String resvOutPortId, String resvOutCarrId, UseYn smplLotYn, String smplWorkTyp, Integer smplQty, String mdfyUserId, Timestamp mdfyDt, String crtUserId, Timestamp crtDt) {
+    public WhWipStatSaveRequestVo(String refObjId, String siteId, String lotId, String carrId, String carrLctnNm, String workStatCd, String dtlWorkStatCd, String cstmEvntNm, String evntNm, Timestamp fnlEvntDt, String prevCstmEvntNm, String prevEvntNm, String rsnCd, String tid, String trnsCm, String useStatCd, String crntEqpId, String crntPortId, String batchId, String resvEqpId, String resvPortId, String eqpChkYn, String rcpChkYn, String trackInCnfmYn, String resvGrpId, String batchSeq, String selfInspInfoObjId, String selfInspYn, Integer selfInspPanelCnt, String resvOutPortId, String resvOutCarrId, String smplLotYn, String smplWorkTyp, Integer smplQty, String mdfyUserId, Timestamp mdfyDt, String crtUserId, Timestamp crtDt) {
         this.refObjId = refObjId;
         this.siteId = siteId;
         this.lotId = lotId;
@@ -117,17 +116,17 @@ public class WhWipStatSaveRequestVo {
                 .batchId(batchId)
                 .resvEqpId(resvEqpId)
                 .resvPortId(resvPortId)
-                .eqpChkYn(eqpChkYn)
-                .rcpChkYn(rcpChkYn)
-                .trackInCnfmYn(trackInCnfmYn)
+                .eqpChkYn(UseYn.valueOf(eqpChkYn))
+                .rcpChkYn(UseYn.valueOf(rcpChkYn))
+                .trackInCnfmYn(UseYn.valueOf(trackInCnfmYn))
                 .resvGrpId(resvGrpId)
                 .batchSeq(batchSeq)
                 .selfInspInfoObjId(selfInspInfoObjId)
-                .selfInspYn(selfInspYn)
+                .selfInspYn(UseYn.valueOf(selfInspYn))
                 .selfInspPanelCnt(selfInspPanelCnt)
                 .resvOutPortId(resvOutPortId)
                 .resvOutCarrId(resvOutCarrId)
-                .smplLotYn(smplLotYn)
+                .smplLotYn(UseYn.valueOf(smplLotYn))
                 .smplWorkTyp(smplWorkTyp)
                 .smplQty(smplQty)
                 .mdfyUserId(mdfyUserId)

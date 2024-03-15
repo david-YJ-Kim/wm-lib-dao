@@ -1,6 +1,8 @@
 package com.abs.wfs.workman.domain.wip.model;
 
+import com.abs.wfs.workman.util.code.UseStatCd;
 import com.abs.wfs.workman.util.code.UseYn;
+import com.abs.wfs.workman.util.code.WorkStatCd;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +36,8 @@ public class WnWipStat {
     @Column(name = "CARR_LCTN_NM")
     private String carrLctnNm;
 
-    // TODO Enum 화
     @Column(name = "WORK_STAT_CD")
-    private String workStatCd;
+    private WorkStatCd workStatCd;
 
     @Column(name = "DTL_WORK_STAT_CD")
     private String dtlWorkStatCd;
@@ -67,7 +68,7 @@ public class WnWipStat {
 
     // TODO Enum 화
     @Column(name = "USE_STAT_CD")
-    private String useStatCd;
+    private UseStatCd useStatCd;
 
     @Column(name = "CRNT_EQP_ID")
     private String crntEqpId;
@@ -142,8 +143,7 @@ public class WnWipStat {
 
 
     @Builder
-
-    public WnWipStat(String objId, String siteId, String lotId, String carrId, String carrLctnNm, String workStatCd, String dtlWorkStatCd, String cstmEvntNm, String evntNm, Timestamp fnlEvntDt, String prevCstmEvntNm, String prevEvntNm, String rsnCd, String tid, String trnsCm, String useStatCd, String crntEqpId, String crntPortId, String batchId, String resvEqpId, String resvPortId, UseYn eqpChkYn, UseYn rcpChkYn, UseYn trackInCnfmYn, String resvGrpId, String batchSeq, String selfInspInfoObjId, UseYn selfInspYn, Integer selfInspPanelCnt, String resvOutPortId, String resvOutCarrId, UseYn smplLotYn, String smplWorkTyp, Integer smplQty, String mdfyUserId, Timestamp mdfyDt, String crtUserId, Timestamp crtDt) {
+    public WnWipStat(String objId, String siteId, String lotId, String carrId, String carrLctnNm, WorkStatCd workStatCd, String dtlWorkStatCd, String cstmEvntNm, String evntNm, Timestamp fnlEvntDt, String prevCstmEvntNm, String prevEvntNm, String rsnCd, String tid, String trnsCm, UseStatCd useStatCd, String crntEqpId, String crntPortId, String batchId, String resvEqpId, String resvPortId, UseYn eqpChkYn, UseYn rcpChkYn, UseYn trackInCnfmYn, String resvGrpId, String batchSeq, String selfInspInfoObjId, UseYn selfInspYn, Integer selfInspPanelCnt, String resvOutPortId, String resvOutCarrId, UseYn smplLotYn, String smplWorkTyp, Integer smplQty, String mdfyUserId, Timestamp mdfyDt, String crtUserId, Timestamp crtDt) {
         this.objId = objId;
         this.siteId = siteId;
         this.lotId = lotId;

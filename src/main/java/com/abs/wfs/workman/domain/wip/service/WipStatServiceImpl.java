@@ -27,7 +27,13 @@ public class WipStatServiceImpl implements WipStatService {
     private WhWipStatRepository whWipStatRepository;
 
 
+
+    public Optional<WnWipStat> getEntityByObjId(String objId){
+        return Optional.of(this.wnWipStatRepository.findById(objId)).get();
+    }
+
     public WnWipStat saveEntity(WnWipStatSaveRequestVo wnWipStatSaveRequestVo){
+        log.info(wnWipStatSaveRequestVo.toString());
         try{
             WnWipStat entity = wnWipStatSaveRequestVo.toEntity();
             return this.wnWipStatRepository.save(entity);
@@ -35,9 +41,6 @@ public class WipStatServiceImpl implements WipStatService {
             e.printStackTrace();
             return null;
         }
-    }
-    public Optional<WnWipStat> getEntityByObjId(String objId){
-        return Optional.of(this.wnWipStatRepository.findById(objId)).get();
     }
 
     public void deleteEntityByObjId(String objId){
