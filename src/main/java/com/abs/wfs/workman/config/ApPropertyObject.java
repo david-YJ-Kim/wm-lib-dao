@@ -35,29 +35,6 @@ public class ApPropertyObject {
     @Value("${ap.interface.destination.send.topic}")
     private String sendTopicName;
 
-    @Value("${ap.query.batchSize}")
-    private Integer batchSize;
-    @Value("${ap.query.table-name.insp}")
-    private String tableNameInsp;
-    @Value("${ap.query.table-name.meas}")
-    private String tableNameMeas;
-
-    @Value("${ap.query.insert-template}")
-    private String insertBatchTemplate;
-    @Value("${ap.query.del-template}")
-    private String deleteBatchTemplate;
-    @Value("${ap.query.getDelList}")
-    private String getDeleteListSql;
-    @Value("${ap.query.deleteCnWork}")
-    private String deleteCnWork;
-    @Value("${ap.query.insertWorkHistory}")
-    private String insertWorkHistory;
-
-    @Value("${ap.query.rule.parsing}")
-    private String selectParsingRuleDataSql;
-
-    @Value("${ap.query.rule.mapping}")
-    private String selectMappingRuleDataSql;
 
     @Value("${ap.shutdown.force.timeout.ms}")
     private int apShutdownForceTimeoutMs;

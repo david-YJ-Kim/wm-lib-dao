@@ -3,30 +3,49 @@ package com.abs.wfs.workman.function.db;
 import com.abs.wfs.workman.domain.wip.model.WnWipStat;
 import com.abs.wfs.workman.domain.wip.service.WipStatServiceImpl;
 import com.abs.wfs.workman.domain.wip.vo.WnWipStatSaveRequestVo;
-import com.abs.wfs.workman.util.code.UseYn;
+import com.abs.wfs.workman.intf.rest.wip.WipStatController;
 import com.abs.wfs.workman.util.code.WorkStatCd;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Arrays;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Slf4j
+@RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("local")
+@Slf4j
 public class WnWipStatTest {
 
-
     @Autowired
-    private WipStatServiceImpl wipStatService;
+    private MockMvc mockMvc;
 
-
+    @DisplayName("데이터 단건 저장")
     @Test
-    public void saveEntity(){
+    public void saveEntity() throws Exception {
         String siteId = "SVM";
         String lotId = "S23C00010";
         String carrId = "-";
@@ -53,23 +72,26 @@ public class WnWipStatTest {
                 .useStatCd(useStatCd)
                 .crntEqpId(crntEqpId)
                 .crntPortId(crntPortId)
+                .eqpChkYn("N")
+                .rcpChkYn("N")
+                .trackInCnfmYn("N")
+                .selfInspYn("N")
+                .smplLotYn("N")
                 .crtUserId(crtUserId)
                 .crtDt(crtDt)
                 .mdfyDt(mdfyDt)
                 .fnlEvntDt(fnlEvntDt)
                 .build();
 
-        log.info(vo.toString());
-
-        WnWipStat savedEntity = this.wipStatService.saveEntity(vo);
-        String objId = savedEntity.getObjId();
-
-        WnWipStat searchedEntity = this.wipStatService.getEntityByObjId(objId).get();
 
 
-        // 저장된 값 비교
-        assertEquals(searchedEntity.getLotId(), lotId);
-        assertEquals(searchedEntity.getCarrId(), carrId);
-        assertEquals(searchedEntity.getWorkStatCd(), WorkStatCd.valueOf(workStatCd));
+        // Perform the POST request and validate the response
+        mockMvc.perform(MockMvcRequestBuilders.post("/wip/save")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(vo)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lotId").value(lotId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.carrId").value(carrId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.workStatCd").value(workStatCd));
     }
 }

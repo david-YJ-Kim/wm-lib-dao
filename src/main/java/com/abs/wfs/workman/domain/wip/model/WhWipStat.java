@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "WN_WIP_STAT")
+@Entity(name = "WH_WIP_STAT")
 public class WhWipStat {
 
     @Id

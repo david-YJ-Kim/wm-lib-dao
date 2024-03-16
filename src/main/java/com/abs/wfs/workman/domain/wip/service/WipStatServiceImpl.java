@@ -15,16 +15,12 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class WipStatServiceImpl implements WipStatService {
 
 
     @Autowired
     private WnWipStatRepository wnWipStatRepository;
 
-
-    @Autowired
-    private WhWipStatRepository whWipStatRepository;
 
 
 
@@ -39,6 +35,7 @@ public class WipStatServiceImpl implements WipStatService {
             return this.wnWipStatRepository.save(entity);
         }catch (Exception e){
             e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }

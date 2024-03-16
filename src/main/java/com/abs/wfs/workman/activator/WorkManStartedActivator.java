@@ -26,8 +26,8 @@ public class WorkManStartedActivator implements ApplicationRunner {
     public void run(ApplicationArguments args){
 
 
-        this.initializeSolaceResources();
-        log.info("Complete initialize solace resources.");
+//        this.initializeSolaceResources();
+//        log.info("Complete initialize solace resources.");
 
 
         this.initializeSharedVariables();

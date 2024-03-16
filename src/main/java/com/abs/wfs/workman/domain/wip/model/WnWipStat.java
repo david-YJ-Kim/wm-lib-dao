@@ -105,7 +105,7 @@ public class WnWipStat {
 
     @Column(name = "SELF_INSP_INFO_OBJ_ID")
     private String selfInspInfoObjId;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "SELF_INSP_YN")
     private UseYn selfInspYn;
