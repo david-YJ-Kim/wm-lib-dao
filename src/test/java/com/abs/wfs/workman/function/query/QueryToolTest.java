@@ -1,6 +1,7 @@
 package com.abs.wfs.workman.function.query;
 
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
+import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class QueryToolTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("TOOL 상태 조회 테스트")
+    @DisplayName("EQP 상태 조회 테스트")
     public void queryToolCondition() throws Exception {
         String site = "SVM";
         String eqpId = "AP-LA-03-01";
@@ -46,6 +47,29 @@ public class QueryToolTest {
                         .content(new ObjectMapper().writeValueAsString(vo)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.eqpId").value(eqpId))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("Port 상태 조회 테스트")
+    public void queryPortCondition() throws Exception {
+        String site = "SVM";
+        String eqpId = "AP-TG-08-01";
+        String portId = "AP-TG-08-01-BP01";
+        String useStatCd = "Usable";
+
+        QueryPortVo vo = QueryPortVo.builder()
+                .siteId(site)
+                .eqpId(eqpId)
+                .portId(portId)
+                .useStatCd(useStatCd)
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/query/condition/port")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(vo)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.portId").value(portId))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

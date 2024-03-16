@@ -1,0 +1,3 @@
+### GET request with a header
+GET http://localhost:9010/staterule/all
+Accept: application/json

@@ -1,17 +1,24 @@
 package com.abs.wfs.workman.message.service.eap.impl;
 
-import com.abs.wfs.workman.message.WorkManMessageList;
+import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
+import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
+import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
+import com.abs.wfs.workman.util.code.UseStatCd;
 import com.abs.wfs.workman.util.code.WorkManScenarioList;
 import com.abs.wfs.workman.message.service.eap.WfsLoadReq;
 import com.abs.wfs.workman.message.util.WorkManCommonUtil;
 import com.abs.wfs.workman.message.vo.common.ApMessageResultVo;
 import com.abs.wfs.workman.message.vo.receive.eap.WfsLoadReqVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class WFsLoadReqImpl implements WfsLoadReq {
+public class WfsLoadReqImpl implements WfsLoadReq {
+
+    @Autowired
+    ToolQueryServiceImpl toolQueryService;
 
     private WfsLoadReqVo.WfsLoadReqBody wfsLoadReqBody;
     private long executeStartTime;
@@ -26,6 +33,23 @@ public class WFsLoadReqImpl implements WfsLoadReq {
     public ApMessageResultVo execute(String messageId) throws Exception {
 
         // TODO Get Data from query service
+        QueryEqpVo queryEqpVo = toolQueryService.queryEqpCondition(
+                                                        QueryEqpVo.builder()
+                                                        .siteId(this.wfsLoadReqBody.getSiteId())
+                                                        .useStatCd(UseStatCd.Usable.name())
+                                                        .eqpId(this.wfsLoadReqBody.getEqpId())
+                                                        .build()
+        );
+
+        QueryPortVo queryPortVo = toolQueryService.queryPortCondition(
+                                                    QueryPortVo.builder()
+                                                            .siteId(this.wfsLoadReqBody.getSiteId())
+                                                            .useStatCd(UseStatCd.Usable.name())
+                                                            .eqpId(this.wfsLoadReqBody.getEqpId())
+                                                            .portId(this.wfsLoadReqBody.getPortId())
+                                                            .build()
+        );
+
 
         // TODO DO Validation such as state rule.
 

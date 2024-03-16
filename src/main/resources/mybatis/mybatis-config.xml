@@ -21,7 +21,7 @@
 <!--        <mapper resource="/mybatis/query/workJobSlotInfoQuery.xml" />-->
 <!--        <mapper resource="/mybatis/query/workJobCellInfoQuery.xml" />-->
 <!--        <mapper resource="/mybatis/query/workStatQuery.xml" />-->
-        <mapper resource="mybatis/sql/eqpQuery.xml" />
+        <mapper resource="mybatis/sql/ToolQuery.xml" />
     </mappers>
 
 </configuration>

@@ -9,4 +9,4 @@
  * @author david
  *
  */
-package com.abs.wfs.workman.function.db;
+package com.abs.wfs.workman.function.jpa;
