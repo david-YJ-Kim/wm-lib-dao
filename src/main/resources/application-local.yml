@@ -80,3 +80,6 @@ ap:
     polling:
       interval:
         ms: 10
+  local:
+    active:
+      profile: local

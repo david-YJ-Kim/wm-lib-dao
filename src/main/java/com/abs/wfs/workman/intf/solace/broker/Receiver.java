@@ -5,16 +5,13 @@ import com.abs.wfs.workman.message.WorkManMessageList;
 import com.abs.wfs.workman.message.service.eap.WfsLoadReq;
 import com.abs.wfs.workman.message.vo.receive.eap.WfsLoadReqVo;
 import com.abs.wfs.workman.util.ApplicationContextProvider;
-import com.abs.wfs.workman.util.code.ApConstant;
+import com.abs.wfs.workman.util.code.ApEnumConstant;
 import com.abs.wfs.workman.util.code.WorkManScenarioList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solacesystems.jcsmp.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskRejectedException;
-
-import java.io.IOException;
 
 @Slf4j
 public class Receiver implements Runnable {
@@ -100,8 +97,8 @@ public class Receiver implements Runnable {
 
 
             SDTMap userProperty = message.getProperties();
-            String cid = userProperty.getString(ApConstant.cid.name());
-            String messageId = userProperty.getString(ApConstant.messageId.name());
+            String cid = userProperty.getString(ApEnumConstant.cid.name());
+            String messageId = userProperty.getString(ApEnumConstant.messageId.name());
 
             // TODO Get received destination.
 
@@ -199,7 +196,7 @@ public class Receiver implements Runnable {
                     log.info("[{}] Request vo: {}", messageId, wfsLoadReqVo.getBody().toString());
 
                     WfsLoadReq wfsLoadReq = ApplicationContextProvider.getBean(WfsLoadReq.class);
-                    wfsLoadReq.init(wfsLoadReqVo);
+                    wfsLoadReq.init(WorkManMessageList.WFS_LOAD_REQ, wfsLoadReqVo);
 
                     wfsLoadReq.execute(messageId);
 

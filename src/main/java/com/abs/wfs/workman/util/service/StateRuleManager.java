@@ -106,7 +106,7 @@ public class StateRuleManager {
      * @return
      * @throws Exception
      */
-    public boolean AutoModeEqp(String siteId, String eqpId, QueryEqpVo eqpVO) throws Exception {
+    public boolean autoModeEqp(String siteId, String eqpId, QueryEqpVo eqpVO) throws Exception {
         log.info("StateRule Check : AutoModeEqp");
         ObjectMapper objectMapper = new ObjectMapper();
         @SuppressWarnings("unchecked")
@@ -159,7 +159,7 @@ public class StateRuleManager {
      * @return
      * @throws Exception
      */
-    public boolean FullAutoPort(String siteId, String eqpId, String portId, QueryPortVo portVO) throws Exception {
+    public boolean fullAutoPort(String siteId, String eqpId, String portId, QueryPortVo portVO) throws Exception {
         log.info("StateRule Check : FullAutoPort");
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -188,7 +188,7 @@ public class StateRuleManager {
      * @return
      * @throws Exception
      */
-    public boolean AutoPort(String siteId, String eqpId, String portId, QueryPortVo portVO) throws Exception {
+    public boolean autoPort(String siteId, String eqpId, String portId, QueryPortVo portVO) throws Exception {
         log.info("StateRule Check : AutoPort");
         ObjectMapper objectMapper = new ObjectMapper();
 

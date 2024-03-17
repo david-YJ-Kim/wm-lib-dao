@@ -1,7 +1,7 @@
 package com.abs.wfs.workman.intf.solace;
 
 import com.abs.wfs.workman.config.SolaceSessionConfiguration;
-import com.abs.wfs.workman.util.code.ApConstant;
+import com.abs.wfs.workman.util.code.ApEnumConstant;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solacesystems.jcsmp.*;
@@ -57,7 +57,7 @@ public class InterfaceSolacePub {
 
             SDTMap userPropMap = JCSMPFactory.onlyInstance().createMap();
 
-            userPropMap.putString(ApConstant.cid.name(), sendCid);
+            userPropMap.putString(ApEnumConstant.cid.name(), sendCid);
             txtMsg.setText(payload);
             txtMsg.setProperties(userPropMap);
 
@@ -87,8 +87,8 @@ public class InterfaceSolacePub {
 //            else
 //            	sendCid = FisMessageList.BRS_MEAS_DATA_SAVE_REQ;
 
-            userPropMap.putString(ApConstant.cid.name(), cid);
-            userPropMap.putString(ApConstant.messageId.name(), "MSG-KEY-TMP-" + UUID.randomUUID() + "-" + System.currentTimeMillis());
+            userPropMap.putString(ApEnumConstant.cid.name(), cid);
+            userPropMap.putString(ApEnumConstant.messageId.name(), "MSG-KEY-TMP-" + UUID.randomUUID() + "-" + System.currentTimeMillis());
             txtMsg.setText(payload);
             txtMsg.setProperties(userPropMap);
 

@@ -1,12 +1,10 @@
 package com.abs.wfs.workman.message.service.eap.impl;
 
 import com.abs.wfs.workman.config.ApPropertyObject;
-import com.abs.wfs.workman.domain.staterule.service.StateRuleInfoServiceImpl;
 import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
 import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
-import com.abs.wfs.workman.util.code.UseStatCd;
-import com.abs.wfs.workman.util.code.WorkManScenarioList;
+import com.abs.wfs.workman.util.code.*;
 import com.abs.wfs.workman.message.service.eap.WfsLoadReq;
 import com.abs.wfs.workman.message.util.WorkManCommonUtil;
 import com.abs.wfs.workman.message.vo.common.ApMessageResultVo;
@@ -33,6 +31,7 @@ public class WfsLoadReqImpl implements WfsLoadReq {
     StateRuleManager stateRuleManager;
 
     private static final String siteId = ApPropertyObject.getInstance().getSiteName();
+    private String cid;
 
     private WfsLoadReqVo.WfsLoadReqBody wfsLoadReqBody;
     private long executeStartTime;
@@ -43,114 +42,45 @@ public class WfsLoadReqImpl implements WfsLoadReq {
     private ExecutorService executorService;
 
     @Override
-    public void init(WfsLoadReqVo wfsLoadReqVo) {
+    public void init(String cid, Object messageObj) {
+        this.cid = cid;
+        this.wfsLoadReqBody = ((WfsLoadReqVo) messageObj).getBody();
         this.executeStartTime = System.currentTimeMillis();
-        this.wfsLoadReqBody = wfsLoadReqVo.getBody();
     }
 
     @Override
     public ApMessageResultVo execute(String messageId) throws Exception {
 
         // Query
-        List<Runnable> tasks = Arrays.asList(
-                () -> {
-                    this.queryEqpVo = toolQueryService.queryEqpCondition(
-                            QueryEqpVo.builder()
-                                    .siteId(this.wfsLoadReqBody.getSiteId())
-                                    .useStatCd(UseStatCd.Usable.name())
-                                    .eqpId(this.wfsLoadReqBody.getEqpId())
-                                    .build()
-                    );
-                },
-                () -> {
-                    this.queryPortVo = toolQueryService.queryPortCondition(
-                            QueryPortVo.builder()
-                                    .siteId(this.wfsLoadReqBody.getSiteId())
-                                    .useStatCd(UseStatCd.Usable.name())
-                                    .eqpId(this.wfsLoadReqBody.getEqpId())
-                                    .portId(this.wfsLoadReqBody.getPortId())
-                                    .build()
-                    );
+        this.executeQueryTasks();
 
-                }
-        );
-        this.executorService = Executors.newFixedThreadPool(tasks.size());
-        CompletableFuture.allOf(tasks.stream()
-                .map(task -> CompletableFuture.runAsync(task, this.executorService))
-                .toArray(CompletableFuture[]::new)).join();
-        this.executorService.shutdown();
+        // Validation - state rule
+        this.executeValidationTasks();
 
 
-        // Validation
-        List<Runnable> validateTasks = Arrays.asList(
-                () -> {
-                    try {
-                        this.stateRuleManager.validEqp(siteId, this.wfsLoadReqBody.getEqpId(), this.queryEqpVo);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                () -> {
-                    try {
-                        this.stateRuleManager.validPort(siteId, this.wfsLoadReqBody.getEqpId(),
-                                                        this.wfsLoadReqBody.getPortId(), this.queryPortVo);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                () -> {
-                    try {
-                        this.stateRuleManager.FullAutoPort(siteId, this.wfsLoadReqBody.getEqpId(),
-                                                    this.wfsLoadReqBody.getPortId(), this.queryPortVo);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                () -> {
-                    try {
-                        this.stateRuleManager.fullAutoEqp(siteId, this.wfsLoadReqBody.getEqpId(), this.queryEqpVo);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
-        this.executorService = Executors.newFixedThreadPool(validateTasks.size());
-        CompletableFuture.allOf(validateTasks.stream()
-                .map(task -> CompletableFuture.runAsync(task, this.executorService))
-                .toArray(CompletableFuture[]::new)).join();
-        this.executorService.shutdown();
-
-        // TODO Get Data from query service
-//        QueryEqpVo queryEqpVo = toolQueryService.queryEqpCondition(
-//                                                        QueryEqpVo.builder()
-//                                                        .siteId(this.wfsLoadReqBody.getSiteId())
-//                                                        .useStatCd(UseStatCd.Usable.name())
-//                                                        .eqpId(this.wfsLoadReqBody.getEqpId())
-//                                                        .build()
-//        );
-//
-//        QueryPortVo queryPortVo = toolQueryService.queryPortCondition(
-//                                                    QueryPortVo.builder()
-//                                                            .siteId(this.wfsLoadReqBody.getSiteId())
-//                                                            .useStatCd(UseStatCd.Usable.name())
-//                                                            .eqpId(this.wfsLoadReqBody.getEqpId())
-//                                                            .portId(this.wfsLoadReqBody.getPortId())
-//                                                            .build()
-//        );
+        // Validation - others
+        if((this.queryPortVo.getCarrTyp().trim()).equals(ApEnumConstant.CA.name())){
+            throw new Exception("CARR TPYE MISMACH");
+        }
 
 
-        // TODO DO Validation such as state rule.
-
+        // Validation each Scenario
         this.scenarioDispatch(messageId);
+
+        // TODO send message or db update
+
+
         ApMessageResultVo apMessageResultVo = ApMessageResultVo.builder()
+                .cid(cid)
+                .messageKey(messageId)
                 .elapsedMilliSecond(System.currentTimeMillis() - executeStartTime)
+                .executeSuccessYn(UseYn.Y)
                 .build();
         return apMessageResultVo;
     }
 
 
-
-    private void scenarioDispatch(String messageId){
+    public void scenarioDispatch(String messageId){
         String eqpId = wfsLoadReqBody.getEqpId();
         String scenarioType = WorkManCommonUtil.getScenarioType(eqpId);
 
@@ -161,9 +91,102 @@ public class WfsLoadReqImpl implements WfsLoadReq {
                 break;
 
             default:
-                // TODO 기본 로직 수행
+
+                // TODO Get message send resource.
+                // TODO generate payload
+
+                // Message send based on Port Type.
+                switch (this.queryPortVo.getPortTyp()){
+                    case ApStringConstant.BP:
+                        break;
+                    case ApStringConstant.OP:
+                        break;
+                    case ApStringConstant.IP:
+                        break;
+
+                    default:
+                        break;
+
+                }
                 break;
         }
 
     }
+
+
+    private void executeQueryTasks() {
+        List<Runnable> tasks = Arrays.asList(
+                this::queryEqp,
+                this::queryPort
+        );
+        executeTasks(tasks);
+    }
+
+    private void executeValidationTasks() {
+        List<Runnable> validateTasks = Arrays.asList(
+                () -> validateStateRule(StateRuleList.ValidEqp),
+                () -> validateStateRule(StateRuleList.ValidPort),
+                () -> validateStateRule(StateRuleList.FullAutoPort),
+                () -> validateStateRule(StateRuleList.FullAutoEqp)
+        );
+        executeTasks(validateTasks);
+    }
+
+    private void executeTasks(List<Runnable> tasks) {
+        executorService = Executors.newFixedThreadPool(tasks.size());
+        CompletableFuture.allOf(tasks.stream()
+                .map(task -> CompletableFuture.runAsync(task, executorService))
+                .toArray(CompletableFuture[]::new)).join();
+        executorService.shutdown();
+    }
+
+
+    private void queryEqp() {
+        queryEqpVo = toolQueryService.queryEqpCondition(
+                QueryEqpVo.builder()
+                        .siteId(wfsLoadReqBody.getSiteId())
+                        .useStatCd(UseStatCd.Usable.name())
+                        .eqpId(wfsLoadReqBody.getEqpId())
+                        .build()
+        );
+    }
+
+    private void queryPort() {
+        queryPortVo = toolQueryService.queryPortCondition(
+                QueryPortVo.builder()
+                        .siteId(wfsLoadReqBody.getSiteId())
+                        .useStatCd(UseStatCd.Usable.name())
+                        .eqpId(wfsLoadReqBody.getEqpId())
+                        .portId(wfsLoadReqBody.getPortId())
+                        .build()
+        );
+    }
+
+    private void validateStateRule(String validationType) {
+        try {
+            switch (validationType) {
+                case StateRuleList.ValidEqp:
+                    stateRuleManager.validEqp(siteId, wfsLoadReqBody.getEqpId(), queryEqpVo);
+                    break;
+                case StateRuleList.ValidPort:
+                    stateRuleManager.validPort(siteId, wfsLoadReqBody.getEqpId(),
+                            wfsLoadReqBody.getPortId(), queryPortVo);
+                    break;
+                case StateRuleList.FullAutoPort:
+                    stateRuleManager.fullAutoPort(siteId, wfsLoadReqBody.getEqpId(),
+                            wfsLoadReqBody.getPortId(), queryPortVo);
+                    break;
+                case StateRuleList.FullAutoEqp:
+                    stateRuleManager.fullAutoEqp(siteId, wfsLoadReqBody.getEqpId(), queryEqpVo);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid validation type: " + validationType);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 }

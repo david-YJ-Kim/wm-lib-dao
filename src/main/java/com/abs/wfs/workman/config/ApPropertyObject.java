@@ -26,6 +26,9 @@ public class ApPropertyObject {
     @Value("${ap.info.sequence}")
     private String processSeq;
 
+    @Value("${ap.local.active.profile}")
+    private String localActiveProfile;
+
     private String clientName;
 
     @Value("${ap.interface.destination.receive.queue}")

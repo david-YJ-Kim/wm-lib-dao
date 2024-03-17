@@ -3,7 +3,7 @@ package com.abs.wfs.workman.intf.solace;
 import com.abs.wfs.workman.config.ApPropertyObject;
 import com.abs.wfs.workman.config.SolaceSessionConfiguration;
 import com.abs.wfs.workman.intf.solace.broker.Receiver;
-import com.abs.wfs.workman.util.code.ApConstant;
+import com.abs.wfs.workman.util.code.ApEnumConstant;
 import com.solacesystems.jcsmp.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,7 +62,7 @@ public class InterfaceSolaceSub implements Runnable {
 
             ApPropertyObject apPropertyObject = ApPropertyObject.getInstance();
 
-            String threadName = apPropertyObject.getClientName() + "-" + ApConstant.receiver.name();
+            String threadName = apPropertyObject.getClientName() + "-" + ApEnumConstant.receiver.name();
             String receiveQueueName = apPropertyObject.getReceiveQueueName();
 
             this.receiver = new Receiver(session, threadName, receiveQueueName);
