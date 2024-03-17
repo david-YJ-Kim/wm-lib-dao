@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.message.vo.receive.common;
+package com.abs.wfs.workman.message.vo.receive.eap.common;
 
 import lombok.Data;
 

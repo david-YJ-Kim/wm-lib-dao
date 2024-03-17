@@ -275,31 +275,31 @@ public class StateRuleManager {
 //
 //    }
 //
-//    /**
-//     * Port Status : LOADING PORT
-//     * @param siteId
-//     * @param eqpId
-//     * @param portId
-//     * @return
-//     * @throws Exception
-//     */
-//    public boolean IsLoadedPort(String siteId, String eqpId, String portId, QueryPortVO portVO) throws Exception {
-//        log.info("StateRule Check : IsLoadedPort");
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        //TN_POS_PORT Table Select
-////		Map<String, String> portData = CommonDAO.getInstance().getPort(siteId, eqpId, portId);
-//
-//        @SuppressWarnings("unchecked")
-//        Map<String, String> portData = objectMapper.convertValue(portVO, Map.class);
-//
-//        RuleCheckResult checkPortResult = ruleChecker.checkRule(StateRuleConstant.IsLoadedPort, portData);
-//
-//        if(!checkPortResult.isResult())
-//            throw new Exception("IsLoadedPort ERROR : "+checkPortResult.getResultList().toString());
-//
-//        return checkPortResult.isResult();
-//    }
+    /**
+     * Port Status : LOADING PORT
+     * @param siteId
+     * @param eqpId
+     * @param portId
+     * @return
+     * @throws Exception
+     */
+    public boolean IsLoadedPort(String siteId, String eqpId, String portId, QueryPortVo portVO) throws Exception {
+        log.info("StateRule Check : IsLoadedPort");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        //TN_POS_PORT Table Select
+//		Map<String, String> portData = CommonDAO.getInstance().getPort(siteId, eqpId, portId);
+
+        @SuppressWarnings("unchecked")
+        Map<String, String> portData = objectMapper.convertValue(portVO, Map.class);
+
+        RuleChecker.RuleCheckResult checkPortResult = ruleChecker.checkRule(StateRuleList.IsLoadedPort, portData, this.wnStateRuleInfoList);
+
+        if(!checkPortResult.isResult())
+            throw new Exception("IsLoadedPort ERROR : "+checkPortResult.getResultList().toString());
+
+        return checkPortResult.isResult();
+    }
 //
 //    /**
 //     * Work 유효성 체크

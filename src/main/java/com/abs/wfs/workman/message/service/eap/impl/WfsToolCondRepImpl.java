@@ -9,6 +9,7 @@ import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
 import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
 import com.abs.wfs.workman.util.code.UseStatCd;
+import com.abs.wfs.workman.util.code.UseYn;
 import com.abs.wfs.workman.util.service.StateRuleManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,28 @@ public class WfsToolCondRepImpl implements WfsToolCondRep {
                                         wfsToolCondRepBody.getStatus().getInPortId(), queryPortVo);
 
 
-        // 1. reserve log query
+        // 1. reserve lot query
         /**
          * SELECT OBJ_ID, LOT_ID, CARR_ID, WORK_STAT_CD, DTL_WORK_STAT_CD
          *   FROM WN_WIP_STAT
          *   WHERE LOT_ID <> '-' AND USE_STAT_CD = 'Usable' AND RESV_EQP_ID = ? AND RESV_PORT_ID = ?
          */
 
-        return null;
+        // if("Result of lot query" in work stat cd is equlas Ready)
+        this.stateRuleManager.IsLoadedPort(wfsToolCondRepBody.getSiteId(), wfsToolCondRepBody.getEqpId(), wfsToolCondRepBody.getStatus().getInPortId(), queryPortVo);
+
+        // TODO Generate Track In Confirm payload
+
+        // TODO Send Track In Confirm payload to BRS
+
+
+        ApMessageResultVo apMessageResultVo = ApMessageResultVo.builder()
+                .cid(cid)
+                .messageKey(messageId)
+                .elapsedMilliSecond(System.currentTimeMillis() - executeStartTime)
+                .executeSuccessYn(UseYn.Y)
+                .build();
+        return apMessageResultVo;
     }
 
     @Override
