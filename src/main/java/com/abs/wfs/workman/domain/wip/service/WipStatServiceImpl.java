@@ -4,12 +4,14 @@ import com.abs.wfs.workman.domain.wip.model.WnWipStat;
 import com.abs.wfs.workman.domain.wip.repository.WhWipStatRepository;
 import com.abs.wfs.workman.domain.wip.repository.WnWipStatRepository;
 import com.abs.wfs.workman.domain.wip.vo.WnWipStatSaveRequestVo;
+import com.abs.wfs.workman.util.code.UseStatCd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -40,7 +42,13 @@ public class WipStatServiceImpl implements WipStatService {
         }
     }
 
+    public WnWipStat findByLotIdAndUseStatCdAndResvEqpIdAndResvPortId(String site, String lotId, String eqpId, String portId, UseStatCd useStatCd) {
+        log.info("site:{}, LotId : {}, UseStatCd : {} , EqpId: {} , PortId : {}",site, lotId, useStatCd, eqpId, portId);
+        return this.wnWipStatRepository.findByLotIdAndUseStatCdAndResvEqpPortAndEqpId(useStatCd, eqpId, portId);
+    }
+
     public void deleteEntityByObjId(String objId){
         this.wnWipStatRepository.deleteById(objId);
     }
+
 }

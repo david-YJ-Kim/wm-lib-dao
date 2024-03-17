@@ -13,6 +13,8 @@ logging:
         jdbc:
           core:
             JdbcTemplate : debug
+      hibernate:
+        SQL: debug
 #    '[org.springframework]': debug
 #    '[org.springframework.web]': debug
 

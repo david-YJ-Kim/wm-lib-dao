@@ -14,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.sql.Timestamp;
@@ -78,5 +79,22 @@ public class WnWipStatTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lotId").value(lotId))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.carrId").value(carrId))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.workStatCd").value(workStatCd));
+    }
+
+    @DisplayName("저장된 데이터 중 예약 설비와 포트 필터 조회")
+    @Test
+    public void getSiteAndUseStatCd() throws Exception {
+
+        String site = "SVM";
+        String eqpId = "AP-RD-04-01";
+        String portId = "AP-RD-04-01-BP01";
+
+
+        // Perform the POST request and validate the response
+        mockMvc.perform(MockMvcRequestBuilders.get(String.format("/wip/reserved/filter?site=%s&eqpId=%s&portId=%s",site, eqpId, portId))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+
     }
 }
