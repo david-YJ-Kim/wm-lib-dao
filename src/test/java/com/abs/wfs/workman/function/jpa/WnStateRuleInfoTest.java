@@ -36,4 +36,20 @@ public class WnStateRuleInfoTest {
                 .andDo(MockMvcResultHandlers.print());
 
     }
+
+    @DisplayName("저장된 데이터 중 사이트와 사용 여부 필터 조회")
+    @Test
+    public void getSiteAndUseStatCd() throws Exception {
+
+        String site = "SVM";
+        String useStatCd = "Usable";
+
+
+        // Perform the POST request and validate the response
+        mockMvc.perform(MockMvcRequestBuilders.get(String.format("/staterule/all/filter?siteId=%s&useStatCd=%s", site, useStatCd))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+
+    }
 }
