@@ -1,8 +1,8 @@
 package com.abs.wfs.workman.function.query;
 
+import com.abs.wfs.workman.query.lot.vo.QueryLotVo;
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
 import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -24,52 +24,30 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 @ActiveProfiles("local")
 @Slf4j
-public class QueryToolTest {
+public class QueryLotTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("EQP 상태 조회 테스트")
+    @DisplayName("Lot 상태 조회 테스트")
     public void queryToolCondition() throws Exception {
         String site = "SVM";
-        String eqpId = "AP-LA-03-01";
+        String lotId = "S24200011";
         String useStatCd = "Usable";
 
-        QueryEqpVo vo = QueryEqpVo.builder()
+        QueryLotVo vo = QueryLotVo.builder()
                             .siteId(site)
-                            .eqpId(eqpId)
+                            .lotId(lotId)
                             .useStatCd(useStatCd)
                             .build();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/tool/query/condition/eqp")
+        mockMvc.perform(MockMvcRequestBuilders.get("/lot/query/condition")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(vo)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.eqpId").value(eqpId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lotId").value(lotId))
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
-    @DisplayName("Port 상태 조회 테스트")
-    public void queryPortCondition() throws Exception {
-        String site = "SVM";
-        String eqpId = "AP-TG-08-01";
-        String portId = "AP-TG-08-01-BP01";
-        String useStatCd = "Usable";
-
-        QueryPortVo vo = QueryPortVo.builder()
-                .siteId(site)
-                .eqpId(eqpId)
-                .portId(portId)
-                .useStatCd(useStatCd)
-                .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/tool/query/condition/port")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(vo)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.portId").value(portId))
-                .andDo(MockMvcResultHandlers.print());
-    }
 }

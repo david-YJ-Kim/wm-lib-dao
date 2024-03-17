@@ -1,5 +1,8 @@
 package com.abs.wfs.workman.intf.rest.query;
 
+import com.abs.wfs.workman.query.lot.service.LotQueryService;
+import com.abs.wfs.workman.query.lot.service.LotQueryServiceImpl;
+import com.abs.wfs.workman.query.lot.vo.QueryLotVo;
 import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
 import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
@@ -8,28 +11,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin
-@RequestMapping("/tool/query")
+@RequestMapping("/lot/query")
 @RequiredArgsConstructor
 @Slf4j
-public class QueryToolController {
+public class QueryLotController {
 
     @Autowired
-    private ToolQueryServiceImpl toolQueryService;
+    private LotQueryServiceImpl lotQueryService;
 
-    @GetMapping("/condition/eqp")
-    public QueryEqpVo queryEqpCondition(@RequestBody QueryEqpVo vo){
+    @GetMapping("/condition")
+    public QueryLotVo queryEqpCondition(@RequestBody QueryLotVo vo){
         log.info(vo.toString());
-        return toolQueryService.queryEqpCondition(vo);
+        return lotQueryService.queryLotCondition(vo);
     }
 
-    @GetMapping("/condition/port")
-    public QueryPortVo queryPortCondition(@RequestBody QueryPortVo vo){
-        log.info(vo.toString());
-        return toolQueryService.queryPortCondition(vo);
-    }
 
 }

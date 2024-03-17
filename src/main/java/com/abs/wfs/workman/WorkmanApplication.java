@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan(basePackages ={"com.abs.wfs.workman.query.tool.mapper"})
 public class WorkmanApplication {
 
     public static void main(String[] args) {

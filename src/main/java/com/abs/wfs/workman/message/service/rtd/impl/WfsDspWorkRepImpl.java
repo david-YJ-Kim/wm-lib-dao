@@ -7,6 +7,7 @@ import com.abs.wfs.workman.message.vo.receive.rtd.WfsDspWorkRepVo;
 import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
 import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
 import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
+import com.abs.wfs.workman.util.code.UseYn;
 import com.abs.wfs.workman.util.service.StateRuleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,6 +43,14 @@ public class WfsDspWorkRepImpl implements WfsDspWorkRep {
 
     @Override
     public ApMessageResultVo execute(String messageId) throws Exception {
-        return null;
+
+
+        ApMessageResultVo apMessageResultVo = ApMessageResultVo.builder()
+                .cid(cid)
+                .messageKey(messageId)
+                .elapsedMilliSecond(System.currentTimeMillis() - executeStartTime)
+                .executeSuccessYn(UseYn.Y)
+                .build();
+        return apMessageResultVo;
     }
 }

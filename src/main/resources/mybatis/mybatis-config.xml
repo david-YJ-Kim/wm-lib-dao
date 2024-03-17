@@ -22,6 +22,7 @@
 <!--        <mapper resource="/mybatis/query/workJobCellInfoQuery.xml" />-->
 <!--        <mapper resource="/mybatis/query/workStatQuery.xml" />-->
         <mapper resource="mybatis/sql/ToolQuery.xml" />
+        <mapper resource="mybatis/sql/LotQuery.xml" />
     </mappers>
 
 </configuration>
