@@ -1,6 +1,7 @@
 package com.abs.wfs.workman.intf.rest.message.standby;
 
 
+import com.abs.wfs.workman.message.WorkManMessageList;
 import com.abs.wfs.workman.message.service.eap.impl.WfsLoadReqImpl;
 import com.abs.wfs.workman.message.vo.common.ApMessageResultVo;
 import com.abs.wfs.workman.message.vo.receive.eap.WfsLoadReqVo;
@@ -24,7 +25,7 @@ public class StandbyMessageController {
     public ApMessageResultVo executeWfsLoadReq(@RequestBody WfsLoadReqVo wfsLoadReqVo) throws Exception {
 
         String messageId = Thread.currentThread().getName() + "_" + System.currentTimeMillis();
-        this.wfsLoadReqService.init("WFS_LOAD_REQ", wfsLoadReqVo);
+        this.wfsLoadReqService.init(WorkManMessageList.WFS_LOAD_REQ, wfsLoadReqVo);
         ApMessageResultVo apMessageResultVo = this.wfsLoadReqService.execute(messageId);
         log.info(apMessageResultVo.toString());
         return apMessageResultVo;
