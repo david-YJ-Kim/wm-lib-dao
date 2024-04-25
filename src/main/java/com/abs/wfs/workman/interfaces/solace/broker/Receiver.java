@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.solace.broker;
+package com.abs.wfs.workman.interfaces.solace.broker;
 
 import com.abs.wfs.workman.message.ApMessagePool;
 import com.abs.wfs.workman.message.WorkManMessageList;

@@ -1,14 +1,12 @@
 package com.abs.wfs.workman.config;
 
-import com.abs.wfs.workman.intf.solace.InterfaceSolacePub;
-import com.abs.wfs.workman.intf.solace.InterfaceSolaceSub;
+import com.abs.wfs.workman.interfaces.solace.InterfaceSolacePub;
+import com.abs.wfs.workman.interfaces.solace.InterfaceSolaceSub;
 import com.abs.wfs.workman.util.FisCommonUtil;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 
 @Getter

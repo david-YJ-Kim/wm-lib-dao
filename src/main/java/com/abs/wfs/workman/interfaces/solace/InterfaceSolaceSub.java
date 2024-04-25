@@ -1,8 +1,8 @@
-package com.abs.wfs.workman.intf.solace;
+package com.abs.wfs.workman.interfaces.solace;
 
 import com.abs.wfs.workman.config.ApPropertyObject;
 import com.abs.wfs.workman.config.SolaceSessionConfiguration;
-import com.abs.wfs.workman.intf.solace.broker.Receiver;
+import com.abs.wfs.workman.interfaces.solace.broker.Receiver;
 import com.abs.wfs.workman.util.code.ApEnumConstant;
 import com.solacesystems.jcsmp.*;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.rest.message.standby;
+package com.abs.wfs.workman.interfaces.rest.message.standby;
 
 
 import com.abs.wfs.workman.message.WorkManMessageList;

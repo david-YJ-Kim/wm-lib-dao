@@ -1,7 +1,7 @@
-package com.abs.wfs.workman.intf.solace.util.vo;
+package com.abs.wfs.workman.interfaces.solace.util.vo;
 
 
-import com.abs.wfs.workman.intf.solace.util.code.FisFileType;
+import com.abs.wfs.workman.interfaces.solace.util.code.FisFileType;
 import com.abs.wfs.workman.util.FisCommonUtil;
 import lombok.Data;
 

@@ -1,11 +1,7 @@
-package com.abs.wfs.workman.intf.rest.query;
+package com.abs.wfs.workman.interfaces.rest.query;
 
-import com.abs.wfs.workman.query.lot.service.LotQueryService;
 import com.abs.wfs.workman.query.lot.service.LotQueryServiceImpl;
 import com.abs.wfs.workman.query.lot.vo.QueryLotVo;
-import com.abs.wfs.workman.query.tool.service.ToolQueryServiceImpl;
-import com.abs.wfs.workman.query.tool.vo.QueryEqpVo;
-import com.abs.wfs.workman.query.tool.vo.QueryPortVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.solace.util.code;
+package com.abs.wfs.workman.interfaces.solace.util.code;
 
 public enum FisConstant {
 

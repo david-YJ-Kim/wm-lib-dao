@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.solace.util.vo;
+package com.abs.wfs.workman.interfaces.solace.util.vo;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.rest.domain.staterule;
+package com.abs.wfs.workman.interfaces.rest.domain.staterule;
 
 
 import com.abs.wfs.workman.domain.staterule.model.WnStateRuleInfo;

@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.solace;
+package com.abs.wfs.workman.interfaces.solace;
 
 import com.abs.wfs.workman.config.SolaceSessionConfiguration;
 import com.abs.wfs.workman.util.code.ApEnumConstant;

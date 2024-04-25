@@ -1,4 +1,4 @@
-package com.abs.wfs.workman.intf.solace.util;
+package com.abs.wfs.workman.interfaces.solace.util;
 
 import com.solacesystems.common.config.Version;
 import com.solacesystems.jcsmp.*;
