@@ -99,53 +99,53 @@
 
     <insert id="createWhWorkJobCellInfo" parameterType="String">
         INSERT INTO WH_WORK_JOB_CELL_INFO (
-                                            OBJ_ID
-                                          ,REF_OBJ_ID
-                                          ,SITE_ID
-                                          ,WORK_ID
-                                          ,JOB_SEQ_ID
-                                          ,LOT_ID
-                                          ,SUB_PROD_MTRL_ID
-                                          ,SUB_PROD_MTRL_STRT_TM
-                                          ,SUB_PROD_MTRL_END_TM
-                                          ,CELL_GRD_CD
-                                          ,EVNT_NM
-                                          ,PREV_EVNT_NM
-                                          ,CSTM_EVNT_NM
-                                          ,PREV_CSTM_EVNT_NM
-                                          ,USE_STAT_CD
-                                          ,RSN_CD
-                                          ,TRNS_CM
-                                          ,CRT_USER_ID
-                                          ,CRT_DT
-                                          ,MDFY_USER_ID
-                                          ,MDFY_DT
-                                          ,FNL_EVNT_DT
-                                          ,TID
+        OBJ_ID
+        ,REF_OBJ_ID
+        ,SITE_ID
+        ,WORK_ID
+        ,JOB_SEQ_ID
+        ,LOT_ID
+        ,SUB_PROD_MTRL_ID
+        ,SUB_PROD_MTRL_STRT_TM
+        ,SUB_PROD_MTRL_END_TM
+        ,CELL_GRD_CD
+        ,EVNT_NM
+        ,PREV_EVNT_NM
+        ,CSTM_EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,USE_STAT_CD
+        ,RSN_CD
+        ,TRNS_CM
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,FNL_EVNT_DT
+        ,TID
         )
         SELECT
-            (SELECT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') || '-' || SYS_GUID() FROM DUAL) AS OBJ_ID
-             ,OBJ_ID AS REF_OBJ_ID
-             ,SITE_ID
-             ,WORK_ID
-             ,JOB_SEQ_ID
-             ,LOT_ID
-             ,SUB_PROD_MTRL_ID
-             ,SUB_PROD_MTRL_STRT_TM
-             ,SUB_PROD_MTRL_END_TM
-             ,CELL_GRD_CD
-             ,EVNT_NM
-             ,PREV_EVNT_NM
-             ,CSTM_EVNT_NM
-             ,PREV_CSTM_EVNT_NM
-             ,USE_STAT_CD
-             ,RSN_CD
-             ,TRNS_CM
-             ,CRT_USER_ID
-             ,CRT_DT
-             ,MDFY_USER_ID
-             ,MDFY_DT
-             ,FNL_EV
+        (SELECT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') || '-' || SYS_GUID() FROM DUAL) AS OBJ_ID
+        ,OBJ_ID AS REF_OBJ_ID
+        ,SITE_ID
+        ,WORK_ID
+        ,JOB_SEQ_ID
+        ,LOT_ID
+        ,SUB_PROD_MTRL_ID
+        ,SUB_PROD_MTRL_STRT_TM
+        ,SUB_PROD_MTRL_END_TM
+        ,CELL_GRD_CD
+        ,EVNT_NM
+        ,PREV_EVNT_NM
+        ,CSTM_EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,USE_STAT_CD
+        ,RSN_CD
+        ,TRNS_CM
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,FNL_EV
         FROM WN_WORK_JOB_CELL_INFO
         WHERE OBJ_ID = #{objId}
     </insert>

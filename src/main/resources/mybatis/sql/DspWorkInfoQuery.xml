@@ -55,57 +55,57 @@
 
     <insert id="createWhDspWorkInfo" parameterType="String">
         INSERT INTO WH_DSP_WORK_INFO (
-                                       OBJ_ID
-                                     ,REF_OBJ_ID
-                                     ,SITE_ID
-                                     ,DSP_WORK_ID
-                                     ,EQP_ID
-                                     ,PORT_ID
-                                     ,LOT_ID
-                                     ,TRACK_IN_CNFM_YN
-                                     ,EQP_CHK_YN
-                                     ,RCP_CHK_YN
-                                     ,RCP_ID
-                                     ,DSP_STAT_CD
-                                     ,EVNT_NM
-                                     ,PREV_EVNT_NM
-                                     ,CSTM_EVNT_NM
-                                     ,PREV_CSTM_EVNT_NM
-                                     ,USE_STAT_CD
-                                     ,RSN_CD
-                                     ,TRNS_CM
-                                     ,CRT_USER_ID
-                                     ,CRT_DT
-                                     ,MDFY_USER_ID
-                                     ,MDFY_DT
-                                     ,FNL_EVNT_DT
-                                     ,TID
+        OBJ_ID
+        ,REF_OBJ_ID
+        ,SITE_ID
+        ,DSP_WORK_ID
+        ,EQP_ID
+        ,PORT_ID
+        ,LOT_ID
+        ,TRACK_IN_CNFM_YN
+        ,EQP_CHK_YN
+        ,RCP_CHK_YN
+        ,RCP_ID
+        ,DSP_STAT_CD
+        ,EVNT_NM
+        ,PREV_EVNT_NM
+        ,CSTM_EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,USE_STAT_CD
+        ,RSN_CD
+        ,TRNS_CM
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,FNL_EVNT_DT
+        ,TID
         )
         SELECT (SELECT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') || '-' || SYS_GUID() FROM DUAL) AS OBJ_ID
-             ,OBJ_ID AS REF_OBJ_ID
-             ,SITE_ID
-             ,DSP_WORK_ID
-             ,EQP_ID
-             ,PORT_ID
-             ,LOT_ID
-             ,TRACK_IN_CNFM_YN
-             ,EQP_CHK_YN
-             ,RCP_CHK_YN
-             ,RCP_ID
-             ,DSP_STAT_CD
-             ,EVNT_NM
-             ,PREV_EVNT_NM
-             ,CSTM_EVNT_NM
-             ,PREV_CSTM_EVNT_NM
-             ,USE_STAT_CD
-             ,RSN_CD
-             ,TRNS_CM
-             ,CRT_USER_ID
-             ,CRT_DT
-             ,MDFY_USER_ID
-             ,MDFY_DT
-             ,FNL_EVNT_DT
-             ,TID
+        ,OBJ_ID AS REF_OBJ_ID
+        ,SITE_ID
+        ,DSP_WORK_ID
+        ,EQP_ID
+        ,PORT_ID
+        ,LOT_ID
+        ,TRACK_IN_CNFM_YN
+        ,EQP_CHK_YN
+        ,RCP_CHK_YN
+        ,RCP_ID
+        ,DSP_STAT_CD
+        ,EVNT_NM
+        ,PREV_EVNT_NM
+        ,CSTM_EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,USE_STAT_CD
+        ,RSN_CD
+        ,TRNS_CM
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,FNL_EVNT_DT
+        ,TID
         FROM WN_DSP_WORK_INFO
         WHERE OBJ_ID = #{objId}
     </insert>

@@ -1,9 +1,6 @@
 package com.abs.wfs.workman.query.work.mapper;
 
-import com.abs.wfs.workman.query.work.vo.WnWorkJob;
-import com.abs.wfs.workman.query.work.vo.WnWorkJobCellInfo;
-import com.abs.wfs.workman.query.work.vo.WnWorkJobSlotInfo;
-import com.abs.wfs.workman.query.work.vo.WnWorkStat;
+import com.abs.wfs.workman.query.work.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -80,5 +77,18 @@ public interface WorkMapper {
     int createWhWorkJobCellInfo(String objId);
 
     int deleteWnWorkJobCellInfoByWorkId(String workId);
+
+
+    //--- WN_DSP_WORK_INFO -----------------
+
+    List<WnDspWorkInfo> selectWnDspWorkInfo(WnDspWorkInfo wnDspWorkInfo);
+
+    int updateWnDspWorkInfo(WnDspWorkInfo wnDspWorkInfo);
+
+    int createWnDspWorkInfo(WnDspWorkInfo wnDspWorkInfo);
+
+    int createWhDspWorkInfo(String objId);
+
+    int deleteWnDspWorkInfo(String objId);
 
 }

@@ -13,7 +13,8 @@ public class WnMtrlUsageInfo {
     private String lotId;
     private String specId;
     private String specTyp;
-    private String specUseCnt;
+    private Double specUseCnt;
+    private Double subSpecUseCnt;
     private String specLimitCnt;
     private String evntNm;
     private String prevEvntNm;
@@ -28,4 +29,5 @@ public class WnMtrlUsageInfo {
     private String mdfyDt;
     private String fnlEvntDt;
     private String tid;
+    private String posnId;
 }

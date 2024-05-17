@@ -3,18 +3,18 @@ package com.abs.wfs.workman.query.work.vo;
 import lombok.Data;
 
 @Data
-public class WnWorkJobSlotInfo {
+public class WnDspWorkInfo {
     private String objId;
     private String siteId;
-    private String workId;
-    private String jobSeqId;
-    private String slotNo;
-    private String prodMtrlId;
-    private String prodMtrlStrtTm;
-    private String prodMtrlEndTm;
-    private String jobStatCd;
-    private String selfInspYn;
-    private String mtrlFaceCd;
+    private String dspWorkId;
+    private String eqpId;
+    private String portId;
+    private String lotId;
+    private String trackInCnfmYn;
+    private String eqpChkYn;
+    private String rcpChkYn;
+    private String rcpId;
+    private String dspStatCd;
     private String evntNm;
     private String prevEvntNm;
     private String cstmEvntNm;
@@ -28,15 +28,12 @@ public class WnWorkJobSlotInfo {
     private String mdfyDt;
     private String fnlEvntDt;
     private String tid;
-    private String lotId;
-    private String scanProdMtrlId;
 
     private String pObjId;
     private String pSiteId;
-    private String pWorkId;
-    private String pJobSeqId;
-    private String pSlotNo;
-    private String pProdMtrlId;
-    private String pUseStatCd;
+    private String pDspWorkId;
+    private String pEqpId;
+    private String pPortId;
+    private String pLotId;
 
 }

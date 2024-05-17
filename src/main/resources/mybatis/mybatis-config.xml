@@ -13,15 +13,17 @@
     </settings>
 
     <mappers>
-        <mapper resource="mybatis/sql/wfsQuery.xml" />
-        <mapper resource="mybatis/sql/wipStatQuery.xml" />
-        <mapper resource="mybatis/sql/sorterJobQuery.xml" />
-        <mapper resource="mybatis/sql/transferJobQuery.xml" />
-        <mapper resource="mybatis/sql/workJobQuery.xml" />
-        <mapper resource="mybatis/sql/workJobSlotInfoQuery.xml" />
-        <mapper resource="mybatis/sql/workJobCellInfoQuery.xml" />
-        <mapper resource="mybatis/sql/workStatQuery.xml" />
-        <mapper resource="mybatis/sql/eqpQuery.xml" />
+        <mapper resource="mybatis/sql/WfsCommonMapper.xml" />
+        <mapper resource="mybatis/sql/DspWorkInfoQuery.xml" />
+        <mapper resource="mybatis/sql/LotQueryMapper.xml" />
+        <mapper resource="mybatis/sql/WipStatQuery.xml" />
+        <mapper resource="mybatis/sql/SorterJobQuery.xml" />
+        <mapper resource="mybatis/sql/TransferJobQuery.xml" />
+        <mapper resource="mybatis/sql/WorkJobQuery.xml" />
+        <mapper resource="mybatis/sql/WorkJobSlotInfoQuery.xml" />
+        <mapper resource="mybatis/sql/WorkJobCellInfoQuery.xml" />
+        <mapper resource="mybatis/sql/WorkStatQuery.xml" />
+        <mapper resource="mybatis/sql/EqpQuery.xml" />
         <mapper resource="mybatis/sql/ToolQuery.xml" />
         <mapper resource="mybatis/sql/LotQuery.xml" />
     </mappers>

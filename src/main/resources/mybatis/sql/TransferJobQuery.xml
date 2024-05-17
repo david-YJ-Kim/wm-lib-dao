@@ -150,62 +150,62 @@
 
     <insert id="createWhTransferJob" parameterType="String">
         INSERT INTO WH_TRANSFER_JOB (
-                                      OBJ_ID
-                                    ,REF_OBJ_ID
-                                    ,SITE_ID
-                                    ,JOB_ID
-                                    ,CARR_ID
-                                    ,CRNT_EQP_ID
-                                    ,CRNT_PORT_ID
-                                    ,SRC_EQP_ID
-                                    ,SRC_PORT_ID
-                                    ,DEST_EQP_ID
-                                    ,DEST_PORT_ID
-                                    ,MOVE_STAT_CD
-                                    ,PRIRT_NO
-                                    ,FNL_EVNT_NM
-                                    ,FNL_EVNT_DT
-                                    ,MDFY_USER_ID
-                                    ,MDFY_DT
-                                    ,CRT_USER_ID
-                                    ,CRT_DT
-                                    ,CSTM_EVNT_NM
-                                    ,EVNT_NM
-                                    ,PREV_CSTM_EVNT_NM
-                                    ,PREV_EVNT_NM
-                                    ,RSN_CD
-                                    ,TID
-                                    ,TRNS_CM
-                                    ,USE_STAT_CD
+        OBJ_ID
+        ,REF_OBJ_ID
+        ,SITE_ID
+        ,JOB_ID
+        ,CARR_ID
+        ,CRNT_EQP_ID
+        ,CRNT_PORT_ID
+        ,SRC_EQP_ID
+        ,SRC_PORT_ID
+        ,DEST_EQP_ID
+        ,DEST_PORT_ID
+        ,MOVE_STAT_CD
+        ,PRIRT_NO
+        ,FNL_EVNT_NM
+        ,FNL_EVNT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,CSTM_EVNT_NM
+        ,EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,PREV_EVNT_NM
+        ,RSN_CD
+        ,TID
+        ,TRNS_CM
+        ,USE_STAT_CD
         )
         SELECT
-            (SELECT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') || '-' || SYS_GUID() FROM DUAL) AS OBJ_ID
-             ,OBJ_ID AS REF_OBJ_ID
-             ,SITE_ID
-             ,JOB_ID
-             ,CARR_ID
-             ,CRNT_EQP_ID
-             ,CRNT_PORT_ID
-             ,SRC_EQP_ID
-             ,SRC_PORT_ID
-             ,DEST_EQP_ID
-             ,DEST_PORT_ID
-             ,MOVE_STAT_CD
-             ,PRIRT_NO
-             ,FNL_EVNT_NM
-             ,FNL_EVNT_DT
-             ,MDFY_USER_ID
-             ,MDFY_DT
-             ,CRT_USER_ID
-             ,CRT_DT
-             ,CSTM_EVNT_NM
-             ,EVNT_NM
-             ,PREV_CSTM_EVNT_NM
-             ,PREV_EVNT_NM
-             ,RSN_CD
-             ,TID
-             ,TRNS_CM
-             ,USE_STAT_CD
+        (SELECT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') || '-' || SYS_GUID() FROM DUAL) AS OBJ_ID
+        ,OBJ_ID AS REF_OBJ_ID
+        ,SITE_ID
+        ,JOB_ID
+        ,CARR_ID
+        ,CRNT_EQP_ID
+        ,CRNT_PORT_ID
+        ,SRC_EQP_ID
+        ,SRC_PORT_ID
+        ,DEST_EQP_ID
+        ,DEST_PORT_ID
+        ,MOVE_STAT_CD
+        ,PRIRT_NO
+        ,FNL_EVNT_NM
+        ,FNL_EVNT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,CSTM_EVNT_NM
+        ,EVNT_NM
+        ,PREV_CSTM_EVNT_NM
+        ,PREV_EVNT_NM
+        ,RSN_CD
+        ,TID
+        ,TRNS_CM
+        ,USE_STAT_CD
         FROM WN_TRANSFER_JOB
         WHERE OBJ_ID = #{objId}
     </insert>
@@ -213,6 +213,6 @@
     <delete id="deleteTransferJob" parameterType="com.absolicsinc.mos.wfs.util.query.model.WnTransferJob">
         DELETE FROM WN_TRANSFER_JOB
         WHERE SITE_ID = #{pSiteId}
-          AND JOB_ID = #{pJobId}
+        AND JOB_ID = #{pJobId}
     </delete>
 </mapper>

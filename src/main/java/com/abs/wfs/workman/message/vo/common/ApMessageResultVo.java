@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Deprecated
 public class ApMessageResultVo {
 
     String cid;

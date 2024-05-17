@@ -3,10 +3,16 @@ package com.abs.wfs.workman.interfaces.solace.broker;
 import com.abs.wfs.workman.message.ApMessagePool;
 import com.abs.wfs.workman.message.WorkManMessageList;
 import com.abs.wfs.workman.message.service.eap.WfsLoadReq;
+import com.abs.wfs.workman.message.vo.common.ApDefaultQueryRequestVo;
+import com.abs.wfs.workman.message.vo.common.ApDefaultQueryVo;
+import com.abs.wfs.workman.message.vo.common.ApFlowProcessVo;
 import com.abs.wfs.workman.message.vo.receive.eap.WfsLoadReqVo;
 import com.abs.wfs.workman.util.ApplicationContextProvider;
 import com.abs.wfs.workman.util.code.ApEnumConstant;
+import com.abs.wfs.workman.util.code.ApScenarioTypeCode;
 import com.abs.wfs.workman.util.code.WorkManScenarioList;
+import com.abs.wfs.workman.util.service.ApDefaultQueryService;
+import com.abs.wfs.workman.util.service.ApDefaultVerifyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solacesystems.jcsmp.*;
 import lombok.SneakyThrows;
@@ -27,10 +33,13 @@ public class Receiver implements Runnable {
     private boolean stopFlagOn = false;
 
 
+
+
     public Receiver(JCSMPSession session, String thread_name, String queue_name) {
         this.session = session;
         this.queue_name = queue_name;
         this.thread_name = thread_name;
+
     }
 
     @Override
@@ -81,6 +90,9 @@ public class Receiver implements Runnable {
     }
 
     public class MessageListener implements XMLMessageListener {
+
+        ApDefaultQueryService defaultQueryService = ApplicationContextProvider.getBean(ApDefaultQueryService.class);
+        ApDefaultVerifyService defaultVerifyService = ApplicationContextProvider.getBean(ApDefaultVerifyService.class);
         public MessageListener(Receiver receiver) {
         }
 
@@ -129,7 +141,7 @@ public class Receiver implements Runnable {
                 String eqpId = "EQP ID  획득";
                 String scenarioType = this.getScenarioType(eqpId);
 
-                this.messageDispatch(cid, messageKey, payload);
+                this.messageDispatch(cid, messageKey, scenarioType, payload);
 
             }catch(TaskRejectedException taskRejectedException){
                 taskRejectedException.printStackTrace();
@@ -148,7 +160,7 @@ public class Receiver implements Runnable {
 
         /**
          * Work State Validation
-          * @param cid
+         * @param cid
          */
         private void validateWorkState(String cid){
             // validate work state with event name.
@@ -176,12 +188,12 @@ public class Receiver implements Runnable {
 
         /**
          * Event 명으로 세부 프로세스 실행
-          * @param cid
+         * @param cid
          * @param messageId
          * @param payload
          * @throws Exception
          */
-        private void messageDispatch(String cid, String messageId, String payload) throws Exception {
+        private void messageDispatch(String cid, String messageId, String scenarioType, String payload) throws Exception {
 
             ObjectMapper mapper = new ObjectMapper()
                     .configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true)
@@ -189,16 +201,23 @@ public class Receiver implements Runnable {
 
 
             log.info("{} Incoming request: {}", messageId, cid);
+            ApDefaultQueryRequestVo apDefaultQueryRequestVo = new ApDefaultQueryRequestVo();
             switch (cid){
                 case WorkManMessageList.WFS_LOAD_REQ:
 
-                    WfsLoadReqVo wfsLoadReqVo = mapper.readValue(payload, WfsLoadReqVo.class);
-                    log.info("[{}] Request vo: {}", messageId, wfsLoadReqVo.getBody().toString());
+                    WfsLoadReqVo payloadVo = mapper.readValue(payload, WfsLoadReqVo.class);
+                    log.info("[{}] Request vo: {}", messageId, payloadVo.getBody().toString());
 
                     WfsLoadReq wfsLoadReq = ApplicationContextProvider.getBean(WfsLoadReq.class);
-                    wfsLoadReq.init(WorkManMessageList.WFS_LOAD_REQ, wfsLoadReqVo);
+                    ApFlowProcessVo apFlowProcessVo = wfsLoadReq.initialize(WorkManMessageList.WFS_LOAD_REQ, ApScenarioTypeCode.valueOf(scenarioType), payloadVo);
 
-                    wfsLoadReq.execute(messageId);
+                    apDefaultQueryRequestVo.setEqpId(payloadVo.getBody().getEqpId());
+                    apDefaultQueryRequestVo.setEqpId(payloadVo.getBody().getPortType());
+                    apFlowProcessVo.setApDefaultQueryVo(this.defaultQueryService.query(apDefaultQueryRequestVo));
+
+                    this.defaultVerifyService.verify(apFlowProcessVo);
+
+                    wfsLoadReq.execute(apFlowProcessVo);
 
                     break;
                 default:
