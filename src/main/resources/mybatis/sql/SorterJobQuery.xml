@@ -3,7 +3,7 @@
 
 <mapper namespace = "com.abs.wfs.workman.query.sorter.mapper.SorterJobMapper">
 
-    <select id="selectWnSorterJobResv" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <select id="selectWnSorterJobResv" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
@@ -45,7 +45,7 @@
     </select>
 
 
-    <select id="selectSorterJobPriorityList" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <select id="selectSorterJobPriorityList" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
@@ -87,7 +87,7 @@
     </select>
 
 
-    <select id="selectWnSorterJobExec" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobExec" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobExec">
+    <select id="selectWnSorterJobExec" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobExec" resultType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobExec">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
@@ -128,13 +128,13 @@
         </where>
     </select>
 
-    <delete id="deleteSorterJobResv" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <delete id="deleteSorterJobResv" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobResv">
         DELETE FROM WN_SORTER_JOB_RESV
         WHERE SITE_ID = #{pSiteId}
         AND JOB_ID = #{pJobId}
     </delete>
 
-    <update id="updateSorterJobExec" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobExec">
+    <update id="updateSorterJobExec" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobExec">
         UPDATE WN_SORTER_JOB_EXEC
         <set>
             <if test="srcLotId != null">SRC_LOT_ID = #{srcLotId},</if>
@@ -182,7 +182,7 @@
 
     </update>
 
-    <update id="updateSorterJobResvPriority" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <update id="updateSorterJobResvPriority" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobResv">
         UPDATE WN_SORTER_JOB_RESV
         SET PRIRT_NO = PRIRT_NO + 1
         ,EVNT_NM = #{evntNm}
@@ -195,7 +195,7 @@
 
     </update>
 
-    <update id="updateSorterJobResv" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <update id="updateSorterJobResv" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobResv">
         UPDATE WN_SORTER_JOB_RESV
         <set>
             <if test="eqpId != null">EQP_ID = #{eqpId},</if>
@@ -244,7 +244,7 @@
 
     </update>
 
-    <insert id="createWnSorterJobExec" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobExec">
+    <insert id="createWnSorterJobExec" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobExec">
         INSERT INTO WN_SORTER_JOB_EXEC (
         OBJ_ID
         ,SITE_ID
@@ -458,7 +458,7 @@
         WHERE OBJ_ID = #{objId}
     </insert>
 
-    <update id="updateSorterJobSlotInfo" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobSlotInfo">
+    <update id="updateSorterJobSlotInfo" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobSlotInfo">
         UPDATE WN_SORTER_JOB_SLOT_INFO
         <set>
             <if test="srcLotId != null">SRC_LOT_ID = #{srcLotId},</if>
@@ -507,7 +507,7 @@
         </selectKey>
     </update>
 
-    <insert id="createWnSorterJobSlotInfo" parameterType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobSlotInfo">
+    <insert id="createWnSorterJobSlotInfo" parameterType="com.abs.wfs.lib.dao.query.sorter.vo.WnSorterJobSlotInfo">
         INSERT INTO WN_SORTER_JOB_SLOT_INFO (
         OBJ_ID
         ,SITE_ID

@@ -3,7 +3,7 @@
 
 <mapper namespace = "com.abs.wfs.workman.query.work.mapper.WorkMapper">
 
-    <update id="updateWnDspWorkInfo" parameterType="com.absolicsinc.mos.wfs.util.query.model.WnDspWorkInfo">
+    <update id="updateWnDspWorkInfo" parameterType="com.abs.wfs.lib.dao.query.work.vo.WnDspWorkInfo">
         UPDATE WN_DSP_WORK_INFO
         <set>
             <if test="objId != null">OBJ_ID = #{objId},</if>

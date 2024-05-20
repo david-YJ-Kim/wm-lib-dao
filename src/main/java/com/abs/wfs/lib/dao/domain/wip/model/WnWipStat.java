@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 public class WnWipStat {
 
     @Id
-    @GenericGenerator(name = "WN_WIP_STAT_SEQ_GENERATOR", strategy = "com.abs.wfs.workman.util.ObjIdGenerator")
+    @GenericGenerator(name = "WN_WIP_STAT_SEQ_GENERATOR", strategy = "com.abs.wfs.lib.dao.util.ObjIdGenerator")
     @GeneratedValue(generator = "WN_WIP_STAT_SEQ_GENERATOR")
     @Column(name = "OBJ_ID")
     private String objId;

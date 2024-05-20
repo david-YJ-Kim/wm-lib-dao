@@ -1,7 +1,6 @@
 package com.abs.wfs.lib.dao.query.tool.vo;
 
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
 @Data

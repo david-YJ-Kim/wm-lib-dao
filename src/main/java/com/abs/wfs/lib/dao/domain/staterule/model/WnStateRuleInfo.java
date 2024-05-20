@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 public class WnStateRuleInfo {
 
     @Id
-    @GenericGenerator(name = "WN_STATE_RULE_INFO_SEQ_GENERATOR", strategy = "com.abs.wfs.workman.util.ObjIdGenerator")
+    @GenericGenerator(name = "WN_STATE_RULE_INFO_SEQ_GENERATOR", strategy = "com.abs.wfs.lib.dao.util.ObjIdGenerator")
     @GeneratedValue(generator = "WN_STATE_RULE_INFO_SEQ_GENERATOR")
     @Column(name = "OBJ_ID")
     private String objId;

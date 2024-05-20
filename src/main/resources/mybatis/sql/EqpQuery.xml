@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "com.abs.wfs.workman.query.eqp.mapper.EqpMapper">
-    <update id="updateTnPosPort" parameterType="com.abs.wfs.workman.query.eqp.vo.TnPosPort">
+    <update id="updateTnPosPort" parameterType="com.abs.wfs.lib.dao.query.eqp.vo.TnPosPort">
         UPDATE TN_POS_PORT
         <set>
             <if test="acesModeCd != null">ACES_MODE_CD = #{acesModeCd},</if>
@@ -97,7 +97,7 @@
         WHERE OBJ_ID = #{objId}
     </insert>
 
-    <update id="updateTnPosEqp" parameterType="com.absolicsinc.mos.wfs.util.query.model.TnPosEqp">
+    <update id="updateTnPosEqp" parameterType="com.abs.wfs.lib.dao.query.eqp.vo.TnPosEqp">
         UPDATE TN_POS_EQP
         <set>
             <if test="sorterModeYn != null">SORTER_MODE_YN = #{sorterModeYn},</if>
@@ -262,7 +262,7 @@
         AND R.USE_STAT_CD = #{useStatCd}
     </select>
 
-    <select id="selectQueryEqpVO" parameterType="hashMap" resultType="com.absolicsinc.mos.wfs.util.query.model.QueryEqpVO">
+    <select id="selectQueryEqpVO" parameterType="hashMap" resultType="com.abs.wfs.lib.dao.query.tool.vo.QueryEqpVO">
         SELECT
         R.EQP_ID,
         R.EQP_TYP,
@@ -314,7 +314,7 @@
         AND R.USE_STAT_CD = #{useStatCd}
     </select>
 
-    <select id="selectQueryPortVO" parameterType="hashMap" resultType="com.absolicsinc.mos.wfs.util.query.model.QueryPortVO">
+    <select id="selectQueryPortVO" parameterType="hashMap" resultType="com.abs.wfs.lib.dao.query.eqp.vo.QueryPortVO">
         SELECT R.PORT_ID
         ,R.PORT_TYP
         ,R.CARR_TYP
