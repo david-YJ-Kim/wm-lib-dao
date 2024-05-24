@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.abs.wfs.lib.dao.query.lot.mapper.LotQueryMapper">
+<mapper namespace = "com.abs.wm.lib.dao.query.lot.mapper.LotQueryMapper">
 
     <select id = "getID" parameterType="String" resultType = "String">
         SELECT #{name} || '_' || TO_CHAR(CURRENT_TIMESTAMP,'YYYYMMDDHH24MISSFF6') AS ID
         FROM DUAL
     </select>
 
-    <select id="selectTnPosProducedMaterialByLotId" parameterType="String"  resultType="com.abs.wfs.lib.dao.query.common.vo.TnPosProducedMaterial" >
+    <select id="selectTnPosProducedMaterialByLotId" parameterType="String"  resultType="com.abs.wm.lib.dao.query.common.vo.TnPosProducedMaterial" >
         SELECT SLOT_NO, PROD_MTRL_ID
         FROM TN_POS_PRODUCED_MATERIAL
         WHERE STAT_CD = 'Active' AND USE_STAT_CD = 'Usable' AND LOT_ID = #{lotId}
         ORDER BY SLOT_NO
     </select>
 
-    <update id="updateTnPosCarrierMoveStatCd" parameterType="com.abs.wfs.lib.dao.query.common.vo.TnPosCarrier">
+    <update id="updateTnPosCarrierMoveStatCd" parameterType="com.abs.wm.lib.dao.query.common.vo.TnPosCarrier">
         UPDATE TN_POS_CARRIER
         <set>
             <if test="moveStatCd != null">MOVE_STAT_CD = #{moveStatCd},</if>
@@ -167,7 +167,7 @@
 
     </insert>
 
-    <select id="selectWnStateRuleInfo" parameterType="com.abs.wfs.lib.dao.domain.staterule.model.WnStateRuleInfo"  resultType="com.abs.wfs.lib.dao.domain.staterule.model.WnStateRuleInfo" >
+    <select id="selectWnStateRuleInfo" parameterType="com.abs.wm.lib.dao.domain.staterule.model.WnStateRuleInfo" resultType="com.abs.wm.lib.dao.domain.staterule.model.WnStateRuleInfo" >
         SELECT OBJ_ID
         ,SITE_ID
         ,RULE_NM
@@ -297,7 +297,7 @@
     </select>
 
 
-    <insert id="insertWnMtrlUsageInfo" parameterType="com.abs.wfs.lib.dao.query.common.vo.WnMtrlUsageInfo">
+    <insert id="insertWnMtrlUsageInfo" parameterType="com.abs.wm.lib.dao.query.common.vo.WnMtrlUsageInfo">
         INSERT INTO WN_MTRL_USAGE_INFO (
         OBJ_ID
         ,SITE_ID
@@ -349,7 +349,7 @@
         )
     </insert>
 
-    <insert id="insertWhErrorInfo" parameterType="com.abs.wfs.lib.dao.query.common.vo.WhErrorInfo">
+    <insert id="insertWhErrorInfo" parameterType="com.abs.wm.lib.dao.query.common.vo.WhErrorInfo">
         INSERT INTO WH_ERROR_INFO (
         OBJ_ID
         ,SITE_ID

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.abs.wfs.lib.dao.query.transfer.mapper.TransferJobMapper">
+<mapper namespace = "com.abs.wm.lib.dao.query.transfer.mapper.TransferJobMapper">
 
-    <select id="selectWnTransferJob" parameterType="com.abs.wfs.lib.dao.query.transfer.vo.WnTransferJob" resultType="com.abs.wfs.lib.dao.query.transfer.vo.WnTransferJob">
+    <select id="selectWnTransferJob" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob" resultType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
@@ -40,7 +40,7 @@
         </where>
     </select>
 
-    <update id="updateWnTransferJob" parameterType="com.abs.wfs.lib.dao.query.transfer.vo.WnTransferJob">
+    <update id="updateWnTransferJob" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
         UPDATE WN_TRANSFER_JOB
         <set>
             <if test="carrId != null">CARR_ID = #{carrId},</if>
@@ -85,7 +85,7 @@
         </selectKey>
     </update>
 
-    <insert id="createWnTransferJob" parameterType="com.abs.wfs.lib.dao.query.transfer.vo.WnTransferJob">
+    <insert id="createWnTransferJob" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
         INSERT INTO WN_TRANSFER_JOB (
         OBJ_ID
         ,SITE_ID
@@ -210,7 +210,7 @@
         WHERE OBJ_ID = #{objId}
     </insert>
 
-    <delete id="deleteTransferJob" parameterType="com.abs.wfs.lib.dao.query.transfer.vo.WnTransferJob">
+    <delete id="deleteTransferJob" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
         DELETE FROM WN_TRANSFER_JOB
         WHERE SITE_ID = #{pSiteId}
         AND JOB_ID = #{pJobId}

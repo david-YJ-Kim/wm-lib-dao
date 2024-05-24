@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "com.abs.wfs.workman.query.eqp.mapper.EqpMapper">
-    <update id="updateTnPosPort" parameterType="com.abs.wfs.lib.dao.query.eqp.vo.TnPosPort">
+    <update id="updateTnPosPort" parameterType="com.abs.wm.lib.dao.query.eqp.vo.TnPosPort">
         UPDATE TN_POS_PORT
         <set>
             <if test="acesModeCd != null">ACES_MODE_CD = #{acesModeCd},</if>
@@ -97,7 +97,7 @@
         WHERE OBJ_ID = #{objId}
     </insert>
 
-    <update id="updateTnPosEqp" parameterType="com.abs.wfs.lib.dao.query.eqp.vo.TnPosEqp">
+    <update id="updateTnPosEqp" parameterType="com.abs.wm.lib.dao.query.eqp.vo.TnPosEqp">
         UPDATE TN_POS_EQP
         <set>
             <if test="sorterModeYn != null">SORTER_MODE_YN = #{sorterModeYn},</if>

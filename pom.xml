@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.abs.wfs</groupId>
+        <groupId>com.abs.wm</groupId>
         <artifactId>wm</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.abs.wfs.lib.dao</groupId>
+    <groupId>com.abs.wm.lib.dao</groupId>
     <artifactId>wm-lib-dao</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>Work Man Common Library</description>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.abs.wfs.lib.dao.query.work.mapper.WorkMapper">
+<mapper namespace = "com.abs.wm.lib.dao.query.work.mapper.WorkMapper">
 
-    <select id="selectWnWorkJob" parameterType="com.abs.wfs.lib.dao.query.work.vo.WnWorkJob" resultType="com.abs.wfs.lib.dao.query.work.vo.WnWorkJob">
+    <select id="selectWnWorkJob" parameterType="com.abs.wm.lib.dao.query.work.vo.WnWorkJob" resultType="com.abs.wm.lib.dao.query.work.vo.WnWorkJob">
         SELECT OBJ_ID
         ,SITE_ID
         ,WORK_ID
@@ -48,7 +48,7 @@
         </where>
     </select>
 
-    <update id="updateWnWorkJob" parameterType="com.abs.wfs.lib.dao.query.work.vo.WnWorkJob">
+    <update id="updateWnWorkJob" parameterType="com.abs.wm.lib.dao.query.work.vo.WnWorkJob">
         UPDATE WN_WORK_JOB
         <set>
             <if test="jobSeqId != null">JOB_SEQ_ID = #{jobSeqId},</if>
@@ -101,7 +101,7 @@
         </selectKey>
     </update>
 
-    <insert id="createWnWorkJob" parameterType="com.abs.wfs.lib.dao.query.work.vo.WnWorkJob">
+    <insert id="createWnWorkJob" parameterType="com.abs.wm.lib.dao.query.work.vo.WnWorkJob">
         INSERT INTO WN_WORK_JOB (
         OBJ_ID
         ,SITE_ID
