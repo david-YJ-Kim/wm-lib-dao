@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.abs.wfs.workman.query.lot.mapper.LotQueryMapper">
+<mapper namespace="com.abs.wm.lib.dao.query.lot.mapper.LotQueryMapper">
     <select id="queryLotCondition" parameterType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo" resultType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo">
         SELECT
         posl.LOT_ID

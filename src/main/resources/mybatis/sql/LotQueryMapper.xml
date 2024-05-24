@@ -225,7 +225,7 @@
         <if test="carrId != null">AND L.CARR_ID = #{carrId}</if>
     </select>
 
-    <select id="selectQueryLotVO" parameterType="hashMap" resultType="com.abs.wfs.lib.dao.query.lot.vo.QueryLotVO">
+    <select id="selectQueryLotVO" parameterType="hashMap" resultType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo">
         SELECT  P.LOT_ID
         ,P.CARR_ID
         ,C.CARR_TYP

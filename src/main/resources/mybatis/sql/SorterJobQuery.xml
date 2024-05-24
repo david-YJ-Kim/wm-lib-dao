@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.abs.wfs.workman.query.sorter.mapper.SorterJobMapper">
+<mapper namespace = "com.abs.wm.lib.dao.query.sorter.mapper.SorterJobMapper">
 
-    <select id="selectWnSorterJobResv" parameterType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <select id="selectWnSorterJobResv" parameterType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
@@ -45,7 +45,7 @@
     </select>
 
 
-    <select id="selectSorterJobPriorityList" parameterType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wfs.workman.query.sorter.vo.WnSorterJobResv">
+    <select id="selectSorterJobPriorityList" parameterType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv" resultType="com.abs.wm.lib.dao.query.sorter.vo.WnSorterJobResv">
         SELECT OBJ_ID
         ,SITE_ID
         ,JOB_ID
