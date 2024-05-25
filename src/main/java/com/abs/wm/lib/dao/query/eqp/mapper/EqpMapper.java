@@ -11,8 +11,11 @@ import java.util.Map;
 @Mapper
 public interface EqpMapper {
 
-    int updateTnPosPort(TnPosPort tnPosPort);
+    @Deprecated
+    int updateTnPosPort(TnPosPort tnPosPort);  // 단일 쿼리 → 도메인 대응 대상
 
+
+    @Deprecated // 단일 테이블 작업 → 도메인 대응 대상
     int createThPosPort(String objId);
 
     int updateTnPosEqp(TnPosEqp tnPosEqp);

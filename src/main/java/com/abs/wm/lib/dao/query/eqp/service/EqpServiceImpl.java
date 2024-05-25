@@ -89,7 +89,8 @@ public class EqpServiceImpl implements EqpService{
      * @param portId
      * @return
      */
-    public int updatePortCarrier(String siteId, String cid, String tid, String userId, String carrierId, String eqpId, String portId) throws Exception{
+    public int updatePortCarrier(String siteId, String cid, String tid, String userId,
+                                 String carrierId, String eqpId, String portId) throws Exception{
 
         int resultVal = -1;
 

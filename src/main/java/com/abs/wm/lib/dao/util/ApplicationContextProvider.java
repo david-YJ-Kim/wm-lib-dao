@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationContextProvider implements ApplicationContextAware {
 
+
+    // TODO Common Util로 이동 필요
     private static ApplicationContext applicationContext;
 
     @Override

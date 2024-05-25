@@ -2,6 +2,8 @@ package com.abs.wm.lib.dao.query.common.vo;
 
 import lombok.Data;
 
+
+@Deprecated
 @Data
 public class TnPosCarrier {
     private String objId;

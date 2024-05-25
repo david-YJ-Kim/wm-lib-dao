@@ -25,6 +25,31 @@ public class QueryEqpVo {
     private String sorterModeAvailYn;
 
 
+    @Builder
+    public QueryEqpVo(String siteId, String useStatCd, String eqpId, String eqpTyp, String modelTyp, String batchYn,
+                      String inlineYn, String eqpInlineSeq, String eqpInlineId, String statCd, String procStatCd,
+                      String ctrlModeCd, String oprtnModeCd, String sorterModeYn, String autoDspYn, String intlkYn,
+                      String sorterModeAvailYn) {
+        this.siteId = siteId;
+        this.useStatCd = useStatCd;
+        this.eqpId = eqpId;
+        this.eqpTyp = eqpTyp;
+        this.modelTyp = modelTyp;
+        this.batchYn = batchYn;
+        this.inlineYn = inlineYn;
+        this.eqpInlineSeq = eqpInlineSeq;
+        this.eqpInlineId = eqpInlineId;
+        this.statCd = statCd;
+        this.procStatCd = procStatCd;
+        this.ctrlModeCd = ctrlModeCd;
+        this.oprtnModeCd = oprtnModeCd;
+        this.sorterModeYn = sorterModeYn;
+        this.autoDspYn = autoDspYn;
+        this.intlkYn = intlkYn;
+        this.sorterModeAvailYn = sorterModeAvailYn;
+    }
+
+
 
 
 

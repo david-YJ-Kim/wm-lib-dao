@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.abs.wm.lib.dao.query.carr.mapper.CarrMapper">
+
+    <select id="carrLocationQuery" parameterType="com.abs.wm.lib.dao.query.carr.vo.CarrLocationVo" resultType="com.abs.wm.lib.dao.query.carr.vo.CarrLocationVo">
+        SELECT
+        WWS.CRNT_EQP_ID,
+        WWS.CRNT_PORT_ID,
+        TPL.LOT_ID,
+        TPL.HOLD_YN,
+        TPL.PROC_STAT_CD,
+        TPL.SGMT_STAT_CD,
+        WWS.WORK_STAT_CD,
+        WWS.RESV_EQP_ID,
+        WWS.RESV_PORT_ID,
+        WWS.RESV_GRP_ID,
+        E.ECO_ID,
+        E.PRNT_LOT_ID
+        FROM WN_WIP_STAT WWS, TN_POS_LOT TPL, CN_POS_ECO_LOT_INFO E
+        WHERE WWS.SITE_ID = TPL.SITE_ID(+)
+        AND WWS.CARR_ID = TPL.CARR_ID(+)
+        AND TPL.SITE_ID = E.SITE_ID(+)
+        AND TPL.LOT_ID = E.LOT_ID(+)
+        AND TPL.PROD_DEF_ID = E.PROD_DEF_ID(+)
+        AND TPL.PROC_DEF_ID = E.PROC_DEF_ID(+)
+        AND TPL.PROC_SGMT_ID = E.PROC_SGMT_ID(+)
+        AND E.TKOUT_DT IS NULL
+
+        AND WWS.CARR_ID = #{pCarrId}
+        AND WWS.LOT_ID = #{pLotId}
+        ORDER BY E.ECO_ID, E.LOT_ID
+
+    </select>
+</mapper>
