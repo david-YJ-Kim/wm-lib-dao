@@ -292,6 +292,36 @@
     </select>
 
 
+    <select id="selectQueryEqpVO" parameterType="com.abs.wm.lib.dao.query.tool.vo.QueryEqpVo" resultType="com.abs.wm.lib.dao.query.tool.vo.QueryEqpVo">
+        SELECT
+        R.EQP_ID,
+        R.EQP_TYP,
+        R.MODEL_TYP,
+        R.BATCH_YN,
+        R.INLINE_YN,
+        R.EQP_INLINE_SEQ,
+        R.EQP_INLINE_ID,
+        R.SORTER_MODE_AVAIL_YN,
+        P.STAT_CD,
+        P.PROC_STAT_CD,
+        P.CTRL_MODE_CD,
+        P.OPRTN_MODE_CD,
+        P.SORTER_MODE_YN,
+        P.AUTO_DSP_YN,
+        P.INTLK_YN
+        FROM
+        TN_RDS_EQP R, TN_POS_EQP P
+        WHERE
+        1 = 1
+        AND R.SITE_ID = P.SITE_ID
+        AND R.EQP_ID = P.EQP_ID
+        AND R.USE_STAT_CD = P.USE_STAT_CD
+        AND R.SITE_ID = #{siteId}
+        AND R.USE_STAT_CD = #{useStatCd}
+        AND R.EQP_ID = #{eqpId}
+    </select>
+
+
 
     <select id="selectPort" parameterType="hashMap" resultType="hashMap">
         SELECT R.PORT_ID

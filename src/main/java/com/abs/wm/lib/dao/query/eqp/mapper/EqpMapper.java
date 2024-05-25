@@ -23,6 +23,11 @@ public interface EqpMapper {
     Map<String, String> selectPort(Map<String, String> map);
 
     QueryEqpVo selectQueryEqpVO(Map<String, String> map);
+    QueryEqpVo selectQueryEqpVO(QueryEqpVo queryEqpVo);
+
     QueryPortVo selectQueryPortVO(Map<String, String> map);
+
+
+
 
 }
