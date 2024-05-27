@@ -3,6 +3,26 @@
 
 <mapper namespace = "com.abs.wm.lib.dao.query.wip.mapper.WipStatMapper">
 
+    <select id="selectWnWipStatWithReserveEqpPort" parameterType="com.abs.wm.lib.dao.query.wip.vo.WnWipStat"
+            resultType="com.abs.wm.lib.dao.query.wip.vo.WnWipStat">
+        SELECT
+        OBJ_ID
+        ,SITE_ID
+        ,LOT_ID
+        ,CARR_ID
+        ,WORK_STAT_CD
+        ,RESV_GRP_ID
+        ,RESV_OUT_CARR_ID
+        ,RESV_OUT_PORT_ID
+        FROM WN_WIP_STAT
+        <where>
+            <if test="pSiteId != null">AND SITE_ID = #{pSiteId}</if>
+            <if test="pReserveEqpId != null">AND RESV_EQP_ID = #{pReserveEqpId}</if>
+            <if test="pReservePortId != null">AND RESV_PORT_ID = #{pReservePortId}</if>
+            <if test="pUseStatCd != null">AND USE_STAT_CD = #{pUseStatCd}</if>
+        </where>
+    </select>
+
     <select id="selectWnWipStat" parameterType="com.abs.wm.lib.dao.query.wip.vo.WnWipStat" resultType="com.abs.wm.lib.dao.query.wip.vo.WnWipStat">
         SELECT OBJ_ID
         ,SITE_ID

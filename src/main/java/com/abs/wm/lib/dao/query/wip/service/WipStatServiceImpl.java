@@ -1,6 +1,8 @@
 package com.abs.wm.lib.dao.query.wip.service;
 
 import com.abs.wm.lib.dao.query.wip.mapper.WipStatMapper;
+import com.abs.wm.lib.dao.query.wip.vo.UpdateDspWorkVo;
+import com.abs.wm.lib.dao.query.wip.vo.UpdateWipStatForMoveCompleteByCarrIdReqVo;
 import com.abs.wm.lib.dao.query.wip.vo.WnWipStat;
 import com.abs.wm.lib.dao.util.code.UseStatCd;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +13,23 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class WipStatServiceImpl {
+public class WipStatServiceImpl implements WipStatService{
 
     @Autowired
     WipStatMapper wipStatMapper;
+
+
+
+    /**
+     * @return
+     */
+    public List<WnWipStat> selectWnWipStatWithReserveEqpPort(WnWipStat wnWipStat) throws Exception{
+
+        return wipStatMapper.selectWnWipStatWithReserveEqpPort(wnWipStat);
+    }
+
+
+
 
 
     /**
@@ -708,6 +723,82 @@ public class WipStatServiceImpl {
 
     }
 
+
+
+    /**
+     * UPDATE WN_WIP_STAT For Crrier Move Completed by CarrierID
+     * CRNT_EQP_ID, CRNT_PORT_ID
+     * @return
+     */
+    public int updateWipStatForMoveCompleteByCarrId(UpdateWipStatForMoveCompleteByCarrIdReqVo reqVo) throws Exception{
+
+        int updateCnt = 0;
+
+
+
+
+        try {
+            WnWipStat param = new WnWipStat();
+
+            // WHERE
+            param.setSiteId(reqVo.getSiteId());
+            param.setCarrId(reqVo.getCarrId());
+            param.setUseStatCd(UseStatCd.Usable.name());
+
+            List<WnWipStat> wipStatList = wipStatMapper.selectWnWipStat(param);
+
+            for(WnWipStat w : wipStatList) {
+                WnWipStat setParam = new WnWipStat();
+                // SET
+                setParam.setCrntEqpId(reqVo.getCrntEqpId());
+
+                String portId = reqVo.getCrntPortId();
+
+                //STOCKER 또는 BUFFER인 경우
+                if(reqVo.getCrntEqpId().indexOf("ASTK") > -1 || reqVo.getCrntPortId().indexOf("BUF") > -1) {
+                    try {
+                        Integer.parseInt(portId);
+                        portId = reqVo.getCrntEqpId() + "_STORAGE";
+                    } catch(NumberFormatException ex) {
+                        // nothing
+                    }
+                }
+
+                setParam.setCrntPortId(reqVo.getCrntPortId());
+                setParam.setWorkStatCd(reqVo.getWorkStatCd());
+
+                setParam.setTrackInCnfmYn(""); // clear
+                setParam.setRcpChkYn(""); // clear
+                setParam.setEqpChkYn(""); // clear
+
+                setParam.setMdfyUserId(reqVo.getUserId());
+                setParam.setEvntNm(reqVo.getCid());
+                setParam.setTid(reqVo.getTid());
+
+                // WHERE
+                setParam.setObjId(w.getObjId());
+
+                //Update & Insert History
+                if(wipStatMapper.updateWnWipStat(setParam) > 0) {
+                    // CREATE HISTORY
+                    wipStatMapper.createWhWipStat(w.getObjId());
+                }
+            }
+
+
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+
+        return updateCnt;
+    }
+
+
+
+
     /**
      * UPDATE WN_WIP_STAT For Crrier Move Completed by CarrierID
      * CRNT_EQP_ID, CRNT_PORT_ID
@@ -989,6 +1080,63 @@ public class WipStatServiceImpl {
 
         return updateCnt;
     }
+
+
+
+    /**
+     * UPDATE WN_WIP_STAT
+     * RTD Dspatching Response -> BothPort, InOut
+     * Reserve Eqp, Port, Reserve Group ID
+     * @return
+     */
+    public int updateDspWorkRepNormal(UpdateDspWorkVo updateDspWorkVo) throws Exception{
+        int updateCnt = 0;
+        try {
+            WnWipStat param = new WnWipStat();
+
+            // WHERE
+            param.setSiteId(updateDspWorkVo.getSiteId());
+            param.setCarrId(updateDspWorkVo.getCarrId());
+            param.setLotId(updateDspWorkVo.getLotId());
+            param.setUseStatCd(UseStatCd.Usable.name());
+
+            List<WnWipStat> wipStatList = wipStatMapper.selectWnWipStatByLot(param);
+
+            for(WnWipStat w : wipStatList) {
+                WnWipStat setParam = new WnWipStat();
+                // SET
+                setParam.setResvEqpId(updateDspWorkVo.getResvEqpId());
+                setParam.setResvPortId(updateDspWorkVo.getResvPortId());
+                setParam.setResvGrpId(updateDspWorkVo.getResvGrpId());
+                setParam.setResvOutCarrId(updateDspWorkVo.getResvOutCarrId());
+                setParam.setResvOutPortId(updateDspWorkVo.getResvOutPortId());
+
+                setParam.setMdfyUserId(updateDspWorkVo.getUserId());
+                setParam.setEvntNm(updateDspWorkVo.getCid());
+                setParam.setTid(updateDspWorkVo.getTid());
+
+                // WHERE
+                setParam.setObjId(w.getObjId());
+
+                log.info("##### UPDATE BEFORE ");
+                //Update & Insert History
+                if(wipStatMapper.updateWnWipStat(setParam) > 0) {
+                    log.info("##### UPDATE AFTER ");
+                    // CREATE HISTORY
+                    wipStatMapper.createWhWipStat(w.getObjId());
+                }
+            }
+
+
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+        return updateCnt;
+    }
+
 
     /**
      * UPDATE WN_WIP_STAT

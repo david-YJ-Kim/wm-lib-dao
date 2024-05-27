@@ -8,6 +8,10 @@ import java.util.List;
 @Mapper
 public interface WipStatMapper {
 
+
+    // select Wip with Reserved Eqp and Port.
+    List<WnWipStat> selectWnWipStatWithReserveEqpPort (WnWipStat wnWipStat);
+
     // select WN_WIP_STAT Table
     List<WnWipStat> selectWnWipStat(WnWipStat wnWipStat);
 

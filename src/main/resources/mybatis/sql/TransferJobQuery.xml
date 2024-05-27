@@ -3,6 +3,34 @@
 
 <mapper namespace = "com.abs.wm.lib.dao.query.transfer.mapper.TransferJobMapper">
 
+    <select id="selectTransferJobWithinTime" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob" resultType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
+        SELECT
+        OBJ_ID
+        ,SITE_ID
+        ,JOB_ID
+        ,CARR_ID
+        ,DEST_EQP_ID
+        ,DEST_PORT_ID
+        ,MOVE_STAT_CD
+        ,PRIRT_NO
+        ,FNL_EVNT_NM
+        ,FNL_EVNT_DT
+        ,MDFY_USER_ID
+        ,MDFY_DT
+        ,CRT_USER_ID
+        ,CRT_DT
+        ,USE_STAT_CD
+        FROM WN_TRANSFER_JOB
+        <where>
+            <if test="pSiteId != null">AND SITE_ID = #{pSiteId}</if>
+            <if test="pCarrId != null">AND CARR_ID = #{pCarrId}</if>
+            <if test="pUseStatCd != null">AND USE_STAT_CD = #{pUseStatCd}</if>
+            AND CRT_DT > SYSTIMESTAMP - 1/24
+        </where>
+    </select>
+
+
+
     <select id="selectWnTransferJob" parameterType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob" resultType="com.abs.wm.lib.dao.query.transfer.vo.WnTransferJob">
         SELECT OBJ_ID
         ,SITE_ID

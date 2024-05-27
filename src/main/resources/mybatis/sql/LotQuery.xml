@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.abs.wm.lib.dao.query.lot.mapper.LotQueryMapper">
-    <select id="queryLotCondition" parameterType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo" resultType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo">
+    <select id="queryLotCondition" parameterType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo"
+            resultType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo">
         SELECT
         posl.LOT_ID
         ,posl.CARR_ID
@@ -43,6 +44,50 @@
         AND posl.SITE_ID = #{siteId}
         AND posl.USE_STAT_CD = #{useStatCd}
         AND posl.LOT_ID = #{lotId}
+    </select>
+
+    <select id="selectQueryLotVO" parameterType="hashMap"
+            resultType="com.abs.wm.lib.dao.query.lot.vo.QueryLotVo">
+        SELECT  P.LOT_ID
+        ,P.CARR_ID
+        ,C.CARR_TYP
+        ,C.CARR_CLS_ID
+        ,P.HOLD_YN
+        ,P.PROD_DEF_ID
+        ,P.PROC_DEF_ID
+        ,P.PROC_SGMT_ID
+        ,P.PROC_STAT_CD
+        ,P.STAT_CD
+        ,P.USE_STAT_CD
+        ,P.QTY
+        ,P.SUB_MTRL_TYP
+        ,P.SUB_MTRL_QTY
+        ,P.SGMT_STAT_CD
+        ,W.WORK_STAT_CD
+        ,W.DTL_WORK_STAT_CD
+        ,W.CRNT_EQP_ID
+        ,W.CRNT_PORT_ID
+        ,W.RESV_GRP_ID
+        ,W.RESV_EQP_ID
+        ,W.RESV_PORT_ID
+        ,W.RESV_OUT_PORT_ID
+        ,W.RESV_OUT_CARR_ID
+        ,W.BATCH_ID
+        ,W.BATCH_SEQ
+        ,W.SELF_INSP_YN
+        ,W.SELF_INSP_INFO_OBJ_ID
+        ,W.SELF_INSP_PANEL_CNT
+        ,P.MTRL_FACE_CD
+        FROM WN_WIP_STAT W
+        ,TN_POS_LOT P
+        ,TN_POS_CARRIER C
+        WHERE W.SITE_ID = P.SITE_ID
+        AND W.SITE_ID = C.SITE_ID(+)
+        AND W.LOT_ID = P.LOT_ID
+        AND P.CARR_ID = C.CARR_ID(+)
+        AND P.SITE_ID = #{siteId}
+        AND P.USE_STAT_CD = #{useStatCd}
+        AND P.LOT_ID = #{lotId}
     </select>
 
 </mapper>

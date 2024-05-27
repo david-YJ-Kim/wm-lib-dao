@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 
 // TODO 공통 lib로 이동 필요
 @Data
-@Builder
 public class ScenarioException  extends RuntimeException{
 
     String messageKey;

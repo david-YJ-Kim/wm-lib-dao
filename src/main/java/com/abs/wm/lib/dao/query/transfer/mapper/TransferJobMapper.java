@@ -9,7 +9,9 @@ import java.util.List;
 public interface TransferJobMapper {
 
     // select WN_TRANSFER_JOB Table
-    List<WnTransferJob> selectWnTransferJob(WnTransferJob wnTransferJob);
+    List<WnTransferJob> selectTransferJob(WnTransferJob wnTransferJob);
+
+    List<WnTransferJob> selectTransferJobWithinTime(WnTransferJob wnTransferJob);
 
     // update WN_TRANSFER_JOB Table
     int updateWnTransferJob(WnTransferJob wnTransferJob);
@@ -22,4 +24,6 @@ public interface TransferJobMapper {
 
     // delete WN_TRANSFER_JOB Table
     int deleteTransferJob(WnTransferJob wnTransferJob);
+
+
 }

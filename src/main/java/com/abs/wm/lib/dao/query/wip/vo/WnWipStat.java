@@ -1,7 +1,10 @@
 package com.abs.wm.lib.dao.query.wip.vo;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class WnWipStat {
 
@@ -54,4 +57,60 @@ public class WnWipStat {
     private String pDtlWorkStatCd;
     private String pUseStatCd;
 
+
+    //  Where Condition for selectWnWipStatWithReserveEqpPort
+    private String pReserveEqpId;
+    private String pReservePortId;
+
+
+    @Builder
+    public WnWipStat(String objId, String siteId, String lotId, String carrId, String carrLctnNm, String workStatCd, String dtlWorkStatCd, String mdfyUserId, String mdfyDt, String crtUserId, String crtDt, String cstmEvntNm, String evntNm, String fnlEvntDt, String prevCstmEvntNm, String prevEvntNm, String rsnCd, String tid, String trnsCm, String useStatCd, String crntEqpId, String crntPortId, String batchId, String resvEqpId, String resvPortId, String resvOutPortId, String resvOutCarrId, String eqpChkYn, String rcpChkYn, String trackInCnfmYn, String resvGrpId, String batchSeq, String selfInspYn, String selfInspInfoObjId, Integer selfInspPanelCnt, String smplLotYn, String smplWorkTyp, Integer smplQty, String pObjId, String pSiteId, String pLotId, String pCarrId, String pWorkStatCd, String pDtlWorkStatCd, String pUseStatCd, String pReserveEqpId, String pReservePortId) {
+        this.objId = objId;
+        this.siteId = siteId;
+        this.lotId = lotId;
+        this.carrId = carrId;
+        this.carrLctnNm = carrLctnNm;
+        this.workStatCd = workStatCd;
+        this.dtlWorkStatCd = dtlWorkStatCd;
+        this.mdfyUserId = mdfyUserId;
+        this.mdfyDt = mdfyDt;
+        this.crtUserId = crtUserId;
+        this.crtDt = crtDt;
+        this.cstmEvntNm = cstmEvntNm;
+        this.evntNm = evntNm;
+        this.fnlEvntDt = fnlEvntDt;
+        this.prevCstmEvntNm = prevCstmEvntNm;
+        this.prevEvntNm = prevEvntNm;
+        this.rsnCd = rsnCd;
+        this.tid = tid;
+        this.trnsCm = trnsCm;
+        this.useStatCd = useStatCd;
+        this.crntEqpId = crntEqpId;
+        this.crntPortId = crntPortId;
+        this.batchId = batchId;
+        this.resvEqpId = resvEqpId;
+        this.resvPortId = resvPortId;
+        this.resvOutPortId = resvOutPortId;
+        this.resvOutCarrId = resvOutCarrId;
+        this.eqpChkYn = eqpChkYn;
+        this.rcpChkYn = rcpChkYn;
+        this.trackInCnfmYn = trackInCnfmYn;
+        this.resvGrpId = resvGrpId;
+        this.batchSeq = batchSeq;
+        this.selfInspYn = selfInspYn;
+        this.selfInspInfoObjId = selfInspInfoObjId;
+        this.selfInspPanelCnt = selfInspPanelCnt;
+        this.smplLotYn = smplLotYn;
+        this.smplWorkTyp = smplWorkTyp;
+        this.smplQty = smplQty;
+        this.pObjId = pObjId;
+        this.pSiteId = pSiteId;
+        this.pLotId = pLotId;
+        this.pCarrId = pCarrId;
+        this.pWorkStatCd = pWorkStatCd;
+        this.pDtlWorkStatCd = pDtlWorkStatCd;
+        this.pUseStatCd = pUseStatCd;
+        this.pReserveEqpId = pReserveEqpId;
+        this.pReservePortId = pReservePortId;
+    }
 }
