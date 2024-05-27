@@ -12,23 +12,23 @@ import java.util.Map;
 public interface EqpMapper {
 
     @Deprecated
-    int updateTnPosPort(TnPosPort tnPosPort);  // 단일 쿼리 → 도메인 대응 대상
+        int updateTnPosPort(TnPosPort tnPosPort);  // 단일 쿼리 → 도메인 대응 대상
 
 
-    @Deprecated // 단일 테이블 작업 → 도메인 대응 대상
-    int createThPosPort(String objId);
+        @Deprecated // 단일 테이블 작업 → 도메인 대응 대상
+        int createThPosPort(String objId);
 
-    int updateTnPosEqp(TnPosEqp tnPosEqp);
+        int updateTnPosEqp(TnPosEqp tnPosEqp);
 
-    int createThPosEqp(String objId);
+        int createThPosEqp(String objId);
 
-    Map<String, String> selectEqp(Map<String, String> map);
-    Map<String, String> selectPort(Map<String, String> map);
+        Map<String, String> selectEqp(Map<String, String> map);
+        Map<String, String> selectPort(Map<String, String> map);
 
-    QueryEqpVo selectQueryEqpVO(Map<String, String> map);
-    QueryEqpVo selectQueryEqpVO(QueryEqpVo queryEqpVo);
+        QueryEqpVo selectQueryEqpVO(Map<String, String> map);
+        QueryEqpVo selectQueryEqpVO(QueryEqpVo queryEqpVo);
 
-    QueryPortVo selectQueryPortVO(Map<String, String> map);
+        QueryPortVo selectQueryPortVO(Map<String, String> map);
 
 
 

@@ -18,7 +18,8 @@
         E.ECO_ID,
         E.PRNT_LOT_ID
         FROM WN_WIP_STAT WWS, TN_POS_LOT TPL, CN_POS_ECO_LOT_INFO E
-        WHERE WWS.SITE_ID = TPL.SITE_ID(+)
+        WHERE 1=1
+        AND WWS.SITE_ID = TPL.SITE_ID(+)
         AND WWS.CARR_ID = TPL.CARR_ID(+)
         AND TPL.SITE_ID = E.SITE_ID(+)
         AND TPL.LOT_ID = E.LOT_ID(+)
